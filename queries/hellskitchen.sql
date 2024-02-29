@@ -2083,11 +2083,26 @@ INSERT INTO FLAVORPROFILE (ingredient_name, is_bitter, is_sweet, is_salty, is_so
 ('Yogurt', FALSE, TRUE, FALSE, TRUE, FALSE),
 ('Zucchini', TRUE, TRUE, FALSE, FALSE, FALSE);
 
-INSERT INTO RECIPE (recipe_id, difficulty, recipe_name, origin) VALUES 
-();
+INSERT INTO RECIPE (recipe_id, difficulty, recipe_name, origin) VALUES
+(1, 'Easy', 'Spaghetti Bolognese', 'Italian'),
+(2, 'Medium', 'Chicken Alfredo', 'Italian');
 
 INSERT INTO INGREDIENTLIST (recipe_id, ingredient_name, ingredient_amt) VALUES
-();
+(1, 'Spaghetti', 250.0),
+(1, 'Ground Beef', 500.0),
+(1, 'Tomato Sauce', 700.0),
+(1, 'Salt', 5.0),
+(2, 'Chicken Breast', 400.0),
+(2, 'Fettuccine', 300.0),
+(2, 'Alfredo Sauce', 500.0);
 
-INSERT INTO RECIPESTEP (step_number, recipe_id, step_descript, prep_time, cook_time) VALUES
-();
+INSERT INTO RECIPESTEP (step_number, recipe_id, ingredient_name, step_descript, prep_time, cook_time) VALUES
+(1, 1, 'Spaghetti', 'Boil spaghetti according to package instructions, until just before al dente.', 1, 10),
+(2, 1, 'Ground Beef', 'Cook ground beef until browned.', 1, 10),
+(3, 1, 'Salt', 'Season ground beef with choice of seasonings, usually salt and pepper.', 1, 0),
+(4, 1, 'Tomato Sauce', 'Add tomato sauce and simmer.', 1, 5),
+(1, 2, 'Salt', 'Season raw chicken with seasonings, usually salt and pepper. Optionally let sit overnight.', 5, 0),
+(2, 2, 'Chicken Breast', 'Grill or pan-fry chicken breast until fully cooked, 150-160 degrees farenheit. Let cool.', 5, 15),
+(3, 2, 'Fettuccine', 'Cook fettuccine according to package instructions.', 1, 10),
+(3, 2, 'Alfredo Sauce', 'Add fetticcine to pan or pot with alfredo and mix thoroughly. Add cookied and cut chicken. Season to taste.', 1, 10);
+
