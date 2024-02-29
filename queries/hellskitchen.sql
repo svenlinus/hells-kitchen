@@ -3,16 +3,20 @@ DROP DATABASE IF EXISTS HELLSKITCHEN;
 CREATE DATABASE HELLSKITCHEN;
 USE HELLSKITCHEN;
 
-CREATE TABLE IF NOT EXISTS INGREDIENT (
-	ingredient_name VARCHAR(50),
-    ingredient_type VARCHAR(50),
+CREATE TABLE
+IF NOT EXISTS INGREDIENT
+(
+	ingredient_name VARCHAR (50),
+    ingredient_type VARCHAR (50),
     ingredient_cost FLOAT,
     PRIMARY KEY (ingredient_name)
 );
 
-CREATE TABLE IF NOT EXISTS RESTRICTION (
-	ingredient_name VARCHAR(50),
-	ingredient_type VARCHAR(50),
+CREATE TABLE
+IF NOT EXISTS RESTRICTION
+(
+	ingredient_name VARCHAR (50),
+	ingredient_type VARCHAR (50),
     is_vegan BOOLEAN,
     is_kosher BOOLEAN,
     is_gluten_free BOOLEAN,
@@ -22,64 +26,76 @@ CREATE TABLE IF NOT EXISTS RESTRICTION (
     is_vegetarian BOOLEAN,
     is_pescatarian BOOLEAN,
 	PRIMARY KEY (ingredient_name, ingredient_type),
-    FOREIGN KEY (ingredient_name) REFERENCES INGREDIENT(ingredient_name)
+    FOREIGN KEY (ingredient_name) REFERENCES INGREDIENT (ingredient_name)
 );
 
-CREATE TABLE IF NOT EXISTS INVENTORY (
-	ingredient_name VARCHAR(50),
+CREATE TABLE
+IF NOT EXISTS INVENTORY
+(
+	ingredient_name VARCHAR (50),
     inventory_amt FLOAT,
     PRIMARY KEY (ingredient_name),
-    FOREIGN KEY (ingredient_name) REFERENCES INGREDIENT(ingredient_name)
+    FOREIGN KEY (ingredient_name) REFERENCES INGREDIENT (ingredient_name)
 );
 
-CREATE TABLE IF NOT EXISTS NUTRITION (
-	ingredient_name VARCHAR(50),
+CREATE TABLE
+IF NOT EXISTS NUTRITION
+(
+	ingredient_name VARCHAR (50),
 	sugar_amt FLOAT,
     fat_amt FLOAT,
     protein_amt FLOAT,
     carb_amt FLOAT,
     PRIMARY KEY (ingredient_name),
-    FOREIGN KEY (ingredient_name) REFERENCES INGREDIENT(ingredient_name)
+    FOREIGN KEY (ingredient_name) REFERENCES INGREDIENT (ingredient_name)
 );
 
-CREATE TABLE IF NOT EXISTS FLAVORPROFILE (
-	ingredient_name VARCHAR(50),
+CREATE TABLE
+IF NOT EXISTS FLAVORPROFILE
+(
+	ingredient_name VARCHAR (50),
     is_bitter BOOLEAN,
     is_sweet BOOLEAN,
     is_salty BOOLEAN,
     is_sour BOOLEAN,
     is_umami BOOLEAN,
 	PRIMARY KEY (ingredient_name),
-    FOREIGN KEY (ingredient_name) REFERENCES INGREDIENT(ingredient_name)
+    FOREIGN KEY (ingredient_name) REFERENCES INGREDIENT (ingredient_name)
 );
 
-CREATE TABLE IF NOT EXISTS RECIPE (
+CREATE TABLE
+IF NOT EXISTS RECIPE
+(
 	recipe_id INT,
-    difficulty VARCHAR(15),
-    recipe_name VARCHAR(50),
-    origin VARCHAR(50),
-    PRIMARY KEY(recipe_id)
-    );
+    difficulty VARCHAR (15),
+    recipe_name VARCHAR (50),
+    origin VARCHAR (50),
+    PRIMARY KEY (recipe_id)
+);
 
-CREATE TABLE IF NOT EXISTS INGREDIENTLIST (
+CREATE TABLE
+IF NOT EXISTS INGREDIENTLIST
+(
 	recipe_id INT,
-	ingredient_name VARCHAR(50),
+	ingredient_name VARCHAR (50),
     ingredient_amt FLOAT,
     PRIMARY KEY (recipe_id, ingredient_name),
-    FOREIGN KEY (ingredient_name) REFERENCES INGREDIENT(ingredient_name),
-    FOREIGN KEY (recipe_id) REFERENCES RECIPE(recipe_id)
+    FOREIGN KEY (ingredient_name) REFERENCES INGREDIENT (ingredient_name),
+    FOREIGN KEY (recipe_id) REFERENCES RECIPE (recipe_id)
 );
 
-CREATE TABLE IF NOT EXISTS RECIPESTEP (
+CREATE TABLE
+IF NOT EXISTS RECIPESTEP
+(
 	step_number INT,
     recipe_id INT,
-    ingredient_name VARCHAR(50),
-    step_descript VARCHAR(100),
+    ingredient_name VARCHAR (50),
+    step_descript VARCHAR (100),
     prep_time INT,
     cook_time INT,
 	PRIMARY KEY (recipe_id, ingredient_name),
-    FOREIGN KEY (recipe_id) REFERENCES RECIPE(recipe_id),
-    FOREIGN KEY (ingredient_name) REFERENCES INGREDIENT(ingredient_name)
+    FOREIGN KEY (recipe_id) REFERENCES RECIPE (recipe_id),
+    FOREIGN KEY (ingredient_name) REFERENCES INGREDIENT (ingredient_name)
 );
 
 -- insert into ingredient
@@ -154,7 +170,9 @@ INSERT INTO INGREDIENT (ingredient_name, ingredient_type, ingredient_cost) VALUE
 ('Canned Green Beans', 'Canned Good', 1.39);
 ('Canned Peas', 'Canned Good', 1.19);
 ('Canned Pineapple', 'Canned Good', 1.79);
-('Canned Peaches', 'Canned Good', 2.29);
+('Canned Peaches', 'Canned Good', 2.29)
+('Mushrooms', 'Vegetable', 3.25),
+('Water', 'Broth', 0.0);
     
 
 -- insert into RESTRICTION
@@ -229,7 +247,9 @@ INSERT INTO RESTRICTION (ingredient_name, ingredient_type, is_vegan, is_kosher, 
 ('Canned Green Beans', 'Canned Good', true, true, true, true, true, true, true, true),
 ('Canned Peas', 'Canned Good', true, true, true, true, true, true, true, true),
 ('Canned Pineapple', 'Canned Good', true, true, true, true, true, true, true, true),
-('Canned Peaches', 'Canned Good', true, true, true, true, true, true, true, true);
+('Canned Peaches', 'Canned Good', true, true, true, true, true, true, true, true),
+('Mushrooms', 'Vegetable', true, true, true, true, true, true, true, true),
+('Water', 'Broth', true, true, true, true, true, true, true, true);
     
 -- insert into NUTRITION
 INSERT INTO NUTRITION (ingredient_name, sugar_amt, fat_amt, protein_amt, carb_amt) VALUES
@@ -302,7 +322,9 @@ INSERT INTO NUTRITION (ingredient_name, sugar_amt, fat_amt, protein_amt, carb_am
 ('Canned Black Beans', 0.9, 1.6, 25, 68);
 ('Canned Green Beans', 1.1, 0.6, 1.5, 5.8);
 ('Canned Peas', 4, 0.6, 3.7, 13);
-('Canned Pineapple', 36, 0.2, 1, 39);
+('Canned Pineapple', 36, 0.2, 1, 39)
+('Mushrooms', 0.3, 0.1, 0.3, 0.6),
+('Water', 0, 0, 0, 0);
     
     
 INSERT INTO FLAVORPROFILE (ingredient_name, is_bitter, is_sweet, is_salty, is_sour, is_umami) VALUES
@@ -356,6 +378,7 @@ INSERT INTO FLAVORPROFILE (ingredient_name, is_bitter, is_sweet, is_salty, is_so
 ('Lamb Chops', FALSE, FALSE, TRUE, FALSE, TRUE),
 ('Mango', FALSE, TRUE, FALSE, TRUE, FALSE),
 ('Milk', FALSE, TRUE, FALSE, FALSE, FALSE),
+('Mushrooms', TRUE, FALSE, FALSE, FALSE, TRUE),
 ('Mustard', TRUE, TRUE, TRUE, TRUE, TRUE),
 ('Nutmeg', TRUE, TRUE, FALSE, FALSE, FALSE),
 ('Oats', TRUE, TRUE, FALSE, FALSE, FALSE),
@@ -383,14 +406,41 @@ INSERT INTO FLAVORPROFILE (ingredient_name, is_bitter, is_sweet, is_salty, is_so
 ('Tomato Sauce', TRUE, TRUE, TRUE, TRUE, TRUE),
 ('Turkey Breast', FALSE, FALSE, TRUE, FALSE, TRUE),
 ('Turmeric', TRUE, FALSE, FALSE, FALSE, FALSE),
+('Water', FALSE, FALSE, FALSE, FALSE, TRUE),
 ('Yogurt', FALSE, TRUE, FALSE, TRUE, FALSE),
 ('Zucchini', TRUE, TRUE, FALSE, FALSE, FALSE);
 
-INSERT INTO RECIPE (recipe_id, difficulty, recipe_name, origin) VALUES 
-();
+INSERT INTO RECIPE (recipe_id, difficulty, recipe_name, origin) VALUES
+(44, 'Easy', 'Mac n Cheese', 'USA'),
+(45, 'Medium', 'Mac n Cheese', 'USA'),
+(46, 'Hard', 'Mac n Cheese', 'USA');
+(1, 'Easy', 'Spaghetti Bolognese', 'Italian'),
+(2, 'Medium', 'Chicken Alfredo', 'Italian');
 
 INSERT INTO INGREDIENTLIST (recipe_id, ingredient_name, ingredient_amt) VALUES
-();
+(1, 'Spaghetti', 250.0),
+(1, 'Ground Beef', 500.0),
+(1, 'Tomato Sauce', 700.0),
+(1, 'Salt', 5.0),
+(2, 'Chicken Breast', 400.0),
+(2, 'Fettuccine', 300.0),
+(2, 'Alfredo Sauce', 500.0);
+(44, 'Cheese', 44),
+(44, 'Pasta', 80),
+(44, 'Water', 800);
 
-INSERT INTO RECIPESTEP (step_number, recipe_id, step_descript, prep_time, cook_time) VALUES
-();
+INSERT INTO RECIPESTEP (step_number, recipe_id, ingredient_name, step_descript, prep_time, cook_time) VALUES
+(1, 1, 'Spaghetti', 'Boil spaghetti according to package instructions, until just before al dente.', 1, 10),
+(2, 1, 'Ground Beef', 'Cook ground beef until browned.', 1, 10),
+(3, 1, 'Salt', 'Season ground beef with choice of seasonings, usually salt and pepper.', 1, 0),
+(4, 1, 'Tomato Sauce', 'Add tomato sauce and simmer.', 1, 5),
+(1, 2, 'Salt', 'Season raw chicken with seasonings, usually salt and pepper. Optionally let sit overnight.', 5, 0),
+(2, 2, 'Chicken Breast', 'Grill or pan-fry chicken breast until fully cooked, 150-160 degrees farenheit. Let cool.', 5, 15),
+(3, 2, 'Fettuccine', 'Cook fettuccine according to package instructions.', 1, 10),
+(3, 2, 'Alfredo Sauce', 'Add fetticcine to pan or pot with alfredo and mix thoroughly. Add cookied and cut chicken. Season to taste.', 1, 10);
+
+INSERT INTO RECIPESTEP (step_number, recipe_id, ingredient_name, step_descript, prep_time, cook_time) VALUES 
+(1, 44, 'Water', 'Begin to boil water.', 0, 7.5),
+(2, 44, 'Pasta', 'Place pasta into the boiling water.', 0, 15),
+(3, 44, 'Cheese', 'Melt cheese and pour it over the pasta when it is finished', 2, 0);
+
