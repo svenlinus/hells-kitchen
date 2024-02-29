@@ -100,77 +100,77 @@ IF NOT EXISTS RECIPESTEP
 
 -- insert into ingredient
 INSERT INTO INGREDIENT (ingredient_name, ingredient_type, ingredient_cost) VALUES 
-('Chicken Breast', 'Meat', 3.99);
-('Salmon', 'Seafood', 7.99);
-('Pork Chops', 'Meat', 5.49);
-('Shrimp', 'Seafood', 9.99);
-('Ground Beef', 'Meat', 4.49);
-('Ground Turkey', 'Meat', 4.99);
-('Lamb Chops', 'Meat', 8.99);
-('Turkey Breast', 'Meat', 6.99);
-('Sirloin Steak', 'Meat', 9.99);
-('Ground Pork', 'Meat', 4.49);
-('Tilapia', 'Seafood', 5.99);
-('Chicken Thighs', 'Meat', 2.99);
-('Broccoli', 'Vegetable', 1.25);
-('Bell Pepper', 'Vegetable', 1.25);
-('Zucchini', 'Vegetable', 1.00);
-('Spinach', 'Vegetable', 1.50);
-('Cucumber', 'Vegetable', 0.99);
-('Onion', 'Vegetable', 0.75);
-('Banana', 'Fruit', 0.5);
-('Strawberries', 'Fruit', 2.99);
-('Mango', 'Fruit', 2.50);
-('Grapes', 'Fruit', 3.49);
-('Pineapple', 'Fruit', 2.99);
-('Avocado', 'Fruit', 1.50);
-('Quinoa', 'Grain', 2.49);
-('Pasta', 'Grain', 1.29);
-('Bread', 'Grain', 2.49);
-('Oats', 'Grain', 1.79);
-('Couscous', 'Grain', 2.19);
-('Barley', 'Grain', 1.89);
-('Cheese', 'Dairy', 3.49);
-('Yogurt', 'Dairy', 2.79);
-('Butter', 'Dairy', 2.29);
-('Soy Sauce', 'Condiment', 2.29);
-('Honey', 'Condiment', 3.99);
-('Ketchup', 'Condiment', 1.49);
-('Mustard', 'Condiment', 1.29);
-('Cumin', 'Spice', 1.79);
-('Thyme', 'Spice', 1.69);
-('Rosemary', 'Spice', 1.79);
-('Parsley', 'Spice', 1.29);
-('Cilantro', 'Spice', 1.49);
-('Oregano', 'Spice', 1.59);
-('Dill', 'Spice', 1.39);
-('Bay Leaves', 'Spice', 1.99);
-('Sage', 'Spice', 1.89);
-('Coriander', 'Spice', 1.69);
-('Turmeric', 'Spice', 2.29);
-('Cardamom', 'Spice', 3.49);
-('Cinnamon', 'Spice', 1.99);
-('Nutmeg', 'Spice', 2.99);
-('Paprika', 'Spice', 1.79);
-('Chili Powder', 'Spice', 1.49);
-('Garlic Powder', 'Spice', 1.49);
-('Onion Powder', 'Spice', 1.29);
-('Cayenne Pepper', 'Spice', 1.79);
-('Ground Ginger', 'Spice', 1.99);
-('Ground Turmeric', 'Spice', 2.29);
-('Crushed Red Pepper', 'Spice', 1.49);
-('Chia Seeds', 'Nut', 3.49);
-('Canned Chickpeas', 'Canned Good', 1.99);
-('Canned Corn', 'Canned Good', 1.29);
-('Canned Tomatoes', 'Canned Good', 1.49);
-('Canned Beans', 'Canned Good', 1.19);
-('Canned Tuna', 'Canned Good', 2.49);
-('Canned Salmon', 'Canned Good', 3.99);
-('Canned Black Beans', 'Canned Good', 1.29);
-('Canned Green Beans', 'Canned Good', 1.39);
-('Canned Peas', 'Canned Good', 1.19);
-('Canned Pineapple', 'Canned Good', 1.79);
-('Canned Peaches', 'Canned Good', 2.29)
+('Chicken Breast', 'Meat', 3.99),
+('Salmon', 'Seafood', 7.99),
+('Pork Chops', 'Meat', 5.49),
+('Shrimp', 'Seafood', 9.99),
+('Ground Beef', 'Meat', 4.49),
+('Ground Turkey', 'Meat', 4.99),
+('Lamb Chops', 'Meat', 8.99),
+('Turkey Breast', 'Meat', 6.99),
+('Sirloin Steak', 'Meat', 9.99),
+('Ground Pork', 'Meat', 4.49),
+('Tilapia', 'Seafood', 5.99),
+('Chicken Thighs', 'Meat', 2.99),
+('Broccoli', 'Vegetable', 1.25),
+('Bell Pepper', 'Vegetable', 1.25),
+('Zucchini', 'Vegetable', 1.00),
+('Spinach', 'Vegetable', 1.50),
+('Cucumber', 'Vegetable', 0.99),
+('Onion', 'Vegetable', 0.75),
+('Banana', 'Fruit', 0.5),
+('Strawberries', 'Fruit', 2.99),
+('Mango', 'Fruit', 2.50),
+('Grapes', 'Fruit', 3.49),
+('Pineapple', 'Fruit', 2.99),
+('Avocado', 'Fruit', 1.50),
+('Quinoa', 'Grain', 2.49),
+('Pasta', 'Grain', 1.29),
+('Bread', 'Grain', 2.49),
+('Oats', 'Grain', 1.79),
+('Couscous', 'Grain', 2.19),
+('Barley', 'Grain', 1.89),
+('Cheese', 'Dairy', 3.49),
+('Yogurt', 'Dairy', 2.79),
+('Butter', 'Dairy', 2.29),
+('Soy Sauce', 'Condiment', 2.29),
+('Honey', 'Condiment', 3.99),
+('Ketchup', 'Condiment', 1.49),
+('Mustard', 'Condiment', 1.29),
+('Cumin', 'Spice', 1.79),
+('Thyme', 'Spice', 1.69),
+('Rosemary', 'Spice', 1.79),
+('Parsley', 'Spice', 1.29),
+('Cilantro', 'Spice', 1.49),
+('Oregano', 'Spice', 1.59),
+('Dill', 'Spice', 1.39),
+('Bay Leaves', 'Spice', 1.99),
+('Sage', 'Spice', 1.89),
+('Coriander', 'Spice', 1.69),
+('Turmeric', 'Spice', 2.29),
+('Cardamom', 'Spice', 3.49),
+('Cinnamon', 'Spice', 1.99),
+('Nutmeg', 'Spice', 2.99),
+('Paprika', 'Spice', 1.79),
+('Chili Powder', 'Spice', 1.49),
+('Garlic Powder', 'Spice', 1.49),
+('Onion Powder', 'Spice', 1.29),
+('Cayenne Pepper', 'Spice', 1.79),
+('Ground Ginger', 'Spice', 1.99),
+('Ground Turmeric', 'Spice', 2.29),
+('Crushed Red Pepper', 'Spice', 1.49),
+('Chia Seeds', 'Nut', 3.49),
+('Canned Chickpeas', 'Canned Good', 1.99),
+('Canned Corn', 'Canned Good', 1.29),
+('Canned Tomatoes', 'Canned Good', 1.49),
+('Canned Beans', 'Canned Good', 1.19),
+('Canned Tuna', 'Canned Good', 2.49),
+('Canned Salmon', 'Canned Good', 3.99),
+('Canned Black Beans', 'Canned Good', 1.29),
+('Canned Green Beans', 'Canned Good', 1.39),
+('Canned Peas', 'Canned Good', 1.19),
+('Canned Pineapple', 'Canned Good', 1.79),
+('Canned Peaches', 'Canned Good', 2.29),
 ('Mushrooms', 'Vegetable', 3.25),
 ('Water', 'Broth', 0.0);
     
@@ -250,79 +250,79 @@ INSERT INTO RESTRICTION (ingredient_name, ingredient_type, is_vegan, is_kosher, 
 ('Canned Peaches', 'Canned Good', true, true, true, true, true, true, true, true),
 ('Mushrooms', 'Vegetable', true, true, true, true, true, true, true, true),
 ('Water', 'Broth', true, true, true, true, true, true, true, true);
-    
+
 -- insert into NUTRITION
 INSERT INTO NUTRITION (ingredient_name, sugar_amt, fat_amt, protein_amt, carb_amt) VALUES
-('Chicken Breast', 0, 2.7, 26, 0);
-('Salmon', 0, 4.3, 23.5, 0);
-('Pork Chops', 0, 11.7, 52.7, 0);
-('Shrimp', 0, 1.4, 19.4, 1.3);
-('Ground Beef', 0, 5.65, 24.19, 0);
-('Ground Turkey', 0, 16.6, 34.5, 0);
-('Lamb Chops', 0, 22.89, 24.96, 0);
-('Turkey Breast', 0, 1.8, 26, 0);
-('Sirloin Steak', 0, 6.4, 22.8, 0);
-('Ground Pork', 0, 18, 22, 0);
-('Tilapia', 0, 4.5, 44, 0);
-('Chicken Thighs', 0, 9, 20, 0);
-('Broccoli', 1.55, 0.34, 2.57, 6.04);
-('Bell Pepper', 5.0, 0.36, 1.2, 7.2);
-('Zucchini', 3.1, 0.4, 1.5, 3.9);
-('Spinach', 0.13, 0.12, 0.86, 1.1);
-('Cucumber', 1.7, 0.11, 0.68, 3.8);
-('Onion', 4.4, 0.2, 1.3, 9.5);
-('Banana', 14, 0.4, 1.3, 27);
-('Strawberries', 4.9, 0.3, 0.7, 7.7);
-('Mango', 45, 1, 3, 50);
-('Grapes', 15, 0.3, 0.6, 16);
-('Pineapple', 16, 0.2, 0.89, 21.65);
-('Avocado', 1.3, 29, 4, 17);
-('Quinoa', 0.8, 1.8, 4.1, 20);
-('Pasta', 0.7, 1.2, 7.2, 38);
-('Bread', 1.6, 0.97, 2.6, 14.3);
-('Oats', 0.4, 2.6, 5.3, 27);
-('Couscous', 0.2, 0.3, 6, 36);
-('Barley', 0.69, 0.44, 3.55, 44.3);
-('Cheese', 0.1, 9.3, 6.4, 0.9);
-('Yogurt', 12, 2.6, 8.9, 12);
-('Butter', 0.01, 11.52, 0.12, 0.01);
-('Soy Sauce', 0.06, 0.09, 1.3, 0.79);
-('Honey', 13.2, 0, 0.06, 17.3);
-('Ketchup', 3.6, 0, 0.2, 4.7);
-('Mustard', 0.05, 0.17, 0.19, 0.29);
-('Cumin', 0.1, 0.5, 0.4, 0.9);
-('Thyme', 0, 0.1, 0.1, 0.9);
-('Rosemary', 0, 0, 0, 0.1);
-('Parsley', 0, 0, 0.1, 0.2);
-('Cilantro', 0, 0, 0, 0.1);
-('Oregano', 0, 0, 0.1, 0.7);
-('Dill', 0, 0, 0, 0.1);
-('Bay Leaves', 0, 0, 0, 0.2);
-('Sage', 0, 0, 0, 0);
-('Coriander', 0, 0, 0.1, 0.2);
-('Turmeric', 0.1, 0.1, 0.3, 2);
-('Cardamom', 0, 0.1, 0.2, 1.4);
-('Cinnamon', 0.06, 0.03, 0.1, 2.1);
-('Nutmeg', 0.07, 0.8, 0.13, 1.1);
-('Paprika', 0.7, 0.88, 0.96, 3.7);
-('Chili Powder', 0.2, 0.4, 0.4, 1.3);
-('Garlic Powder', 0.63, 0.02, 0.47, 2.04);
-('Onion Powder', 0.2, 0, 0.3, 1.9);
-('Cayenne Pepper', 0.2, 0.3, 0.2, 1);
-('Ground Ginger', 0.06, 0.08, 0.16, 1.3);
-('Ground Turmeric', 0.1, 0.1, 0.3, 2);
-('Crushed Red Pepper', 0.2, 0.3, 0.2, 1);
-('Chia Seeds', 0, 8.7, 4.7, 12);
-('Canned Chickpeas', 10, 7, 18, 57);
-('Canned Corn', 12, 3.2, 6, 38);
-('Canned Tomatoes', 4.8, 0.5, 1.5, 6.6);
-('Canned Beans', 5.4, 2.8, 16, 47);
-('Canned Tuna', 0, 5.1, 41, 0);
-('Canned Salmon', 0, 16, 73, 0);
-('Canned Black Beans', 0.9, 1.6, 25, 68);
-('Canned Green Beans', 1.1, 0.6, 1.5, 5.8);
-('Canned Peas', 4, 0.6, 3.7, 13);
-('Canned Pineapple', 36, 0.2, 1, 39)
+('Chicken Breast', 0, 2.7, 26, 0),
+('Salmon', 0, 4.3, 23.5, 0),
+('Pork Chops', 0, 11.7, 52.7, 0),
+('Shrimp', 0, 1.4, 19.4, 1.3),
+('Ground Beef', 0, 5.65, 24.19, 0),
+('Ground Turkey', 0, 16.6, 34.5, 0),
+('Lamb Chops', 0, 22.89, 24.96, 0),
+('Turkey Breast', 0, 1.8, 26, 0),
+('Sirloin Steak', 0, 6.4, 22.8, 0),
+('Ground Pork', 0, 18, 22, 0),
+('Tilapia', 0, 4.5, 44, 0),
+('Chicken Thighs', 0, 9, 20, 0),
+('Broccoli', 1.55, 0.34, 2.57, 6.04),
+('Bell Pepper', 5.0, 0.36, 1.2, 7.2),
+('Zucchini', 3.1, 0.4, 1.5, 3.9),
+('Spinach', 0.13, 0.12, 0.86, 1.1),
+('Cucumber', 1.7, 0.11, 0.68, 3.8),
+('Onion', 4.4, 0.2, 1.3, 9.5),
+('Banana', 14, 0.4, 1.3, 27),
+('Strawberries', 4.9, 0.3, 0.7, 7.7),
+('Mango', 45, 1, 3, 50),
+('Grapes', 15, 0.3, 0.6, 16),
+('Pineapple', 16, 0.2, 0.89, 21.65),
+('Avocado', 1.3, 29, 4, 17),
+('Quinoa', 0.8, 1.8, 4.1, 20),
+('Pasta', 0.7, 1.2, 7.2, 38),
+('Bread', 1.6, 0.97, 2.6, 14.3),
+('Oats', 0.4, 2.6, 5.3, 27),
+('Couscous', 0.2, 0.3, 6, 36),
+('Barley', 0.69, 0.44, 3.55, 44.3),
+('Cheese', 0.1, 9.3, 6.4, 0.9),
+('Yogurt', 12, 2.6, 8.9, 12),
+('Butter', 0.01, 11.52, 0.12, 0.01),
+('Soy Sauce', 0.06, 0.09, 1.3, 0.79),
+('Honey', 13.2, 0, 0.06, 17.3),
+('Ketchup', 3.6, 0, 0.2, 4.7),
+('Mustard', 0.05, 0.17, 0.19, 0.29),
+('Cumin', 0.1, 0.5, 0.4, 0.9),
+('Thyme', 0, 0.1, 0.1, 0.9),
+('Rosemary', 0, 0, 0, 0.1),
+('Parsley', 0, 0, 0.1, 0.2),
+('Cilantro', 0, 0, 0, 0.1),
+('Oregano', 0, 0, 0.1, 0.7),
+('Dill', 0, 0, 0, 0.1),
+('Bay Leaves', 0, 0, 0, 0.2),
+('Sage', 0, 0, 0, 0),
+('Coriander', 0, 0, 0.1, 0.2),
+('Turmeric', 0.1, 0.1, 0.3, 2),
+('Cardamom', 0, 0.1, 0.2, 1.4),
+('Cinnamon', 0.06, 0.03, 0.1, 2.1),
+('Nutmeg', 0.07, 0.8, 0.13, 1.1),
+('Paprika', 0.7, 0.88, 0.96, 3.7),
+('Chili Powder', 0.2, 0.4, 0.4, 1.3),
+('Garlic Powder', 0.63, 0.02, 0.47, 2.04),
+('Onion Powder', 0.2, 0, 0.3, 1.9),
+('Cayenne Pepper', 0.2, 0.3, 0.2, 1),
+('Ground Ginger', 0.06, 0.08, 0.16, 1.3),
+('Ground Turmeric', 0.1, 0.1, 0.3, 2),
+('Crushed Red Pepper', 0.2, 0.3, 0.2, 1),
+('Chia Seeds', 0, 8.7, 4.7, 12),
+('Canned Chickpeas', 10, 7, 18, 57),
+('Canned Corn', 12, 3.2, 6, 38),
+('Canned Tomatoes', 4.8, 0.5, 1.5, 6.6),
+('Canned Beans', 5.4, 2.8, 16, 47),
+('Canned Tuna', 0, 5.1, 41, 0),
+('Canned Salmon', 0, 16, 73, 0),
+('Canned Black Beans', 0.9, 1.6, 25, 68),
+('Canned Green Beans', 1.1, 0.6, 1.5, 5.8),
+('Canned Peas', 4, 0.6, 3.7, 13),
+('Canned Pineapple', 36, 0.2, 1, 39),
 ('Mushrooms', 0.3, 0.1, 0.3, 0.6),
 ('Water', 0, 0, 0, 0);
     
@@ -413,7 +413,7 @@ INSERT INTO FLAVORPROFILE (ingredient_name, is_bitter, is_sweet, is_salty, is_so
 INSERT INTO RECIPE (recipe_id, difficulty, recipe_name, origin) VALUES
 (44, 'Easy', 'Mac n Cheese', 'USA'),
 (45, 'Medium', 'Mac n Cheese', 'USA'),
-(46, 'Hard', 'Mac n Cheese', 'USA');
+(46, 'Hard', 'Mac n Cheese', 'USA'),
 (1, 'Easy', 'Spaghetti Bolognese', 'Italian'),
 (2, 'Medium', 'Chicken Alfredo', 'Italian');
 
@@ -424,7 +424,7 @@ INSERT INTO INGREDIENTLIST (recipe_id, ingredient_name, ingredient_amt) VALUES
 (1, 'Salt', 5.0),
 (2, 'Chicken Breast', 400.0),
 (2, 'Fettuccine', 300.0),
-(2, 'Alfredo Sauce', 500.0);
+(2, 'Alfredo Sauce', 500.0),
 (44, 'Cheese', 44),
 (44, 'Pasta', 80),
 (44, 'Water', 800);
