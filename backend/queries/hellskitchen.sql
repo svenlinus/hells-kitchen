@@ -545,18 +545,6 @@ VALUES
     (15, 'Easy', 'Avocado Shrimp Salad', 'International'),
     (16, 'Easy', 'Pepperoni Pizza', 'Italian');
 
-INSERT INTO RECIPESTEP
-    (step_number, recipe_id, ingredient_name, step_descript, prep_time, cook_time)
-VALUES
-    (1, 1, 'Pasta', 'Boil spaghetti according to package instructions, until just before al dente.', 1, 10),
-    (2, 1, 'Ground Beef', 'Cook ground beef until browned.', 1, 10),
-    (3, 1, 'Salt', 'Season ground beef with choice of seasonings, usually salt and pepper.', 1, 0),
-    (4, 1, 'Tomato Sauce', 'Add tomato sauce and simmer.', 1, 5),
-    (1, 2, 'Salt', 'Season raw chicken with seasonings, usually salt and pepper. Optionally let sit overnight.', 5, 0),
-    (2, 2, 'Chicken Breast', 'Grill or pan-fry chicken breast until fully cooked, 150-160 degrees farenheit. Let cool.', 5, 15),
-    (3, 2, 'Pasta', 'Cook fettuccine according to package instructions.', 1, 10),
-    (3, 2, 'Alfredo Sauce', 'Add fetticcine to pot with alfredo and mix thoroughly. Add cut chicken. Season to taste.', 1, 10);
-
 INSERT
 INTO INGREDIENTLIST
     (recipe_id, ingredient_name, ingredient_amt)
@@ -635,7 +623,7 @@ VALUES
     (15, 'Lemon', 1.0),
     (15, 'Olive Oil', 30.0);
 
-INSERT IGNORE
+INSERT
 INTO RECIPESTEP
 (step_number, recipe_id, ingredient_name, step_descript, prep_time, cook_time) VALUES
 (1, 1, 'Pasta', 'Boil spaghetti according to package instructions, until just before al dente.', 1, 10),
@@ -645,7 +633,7 @@ INTO RECIPESTEP
 (1, 2, 'Salt', 'Season raw chicken with seasonings, usually salt and pepper. Optionally let sit overnight.', 5, 0),
 (2, 2, 'Chicken Breast', 'Grill or pan-fry chicken breast until fully cooked, 150-160 degrees farenheit. Let cool.', 5, 15),
 (3, 2, 'Pasta', 'Cook fettuccine according to package instructions.', 1, 10),
-(3, 2, 'Alfredo Sauce', 'Add fetticcine to pan or pot with alfredo and mix thoroughly. Add cookied and cut chicken. Season to taste.', 1, 10),
+(3, 2, 'Alfredo Sauce', 'Add fetticcine to pan or pot with alfredo and mix thoroughly. Add chicken.', 1, 10),
 (1, 44, 'Water', 'Begin to boil water.', 0, 7.5),
 (2, 44, 'Pasta', 'Place pasta into the boiling water.', 0, 15),
 (3, 44, 'Cheese', 'Melt cheese and pour it over the pasta when it is finished', 2, 0),
@@ -658,7 +646,7 @@ INTO RECIPESTEP
 (3, 5, 'Soy Sauce', 'Pour soy sauce over the tofu and broccoli mixture. Stir well. Works well serving over rice.', 3, 0),
 (1, 6, 'Pizza Dough', 'Roll out pizza dough and spread tomato sauce over it.', 15, 0),
 (2, 6, 'Tomato Sauce', 'Spread tomato sauce over the pizza dough.', 5, 0),
-(3, 6, 'Cheese', 'Sprinkle mozzarella cheese over the pizza. Cook in oven at high temp (400+ degrees) until crust is golden brown.', 5, 15),
+(3, 6, 'Cheese', 'Sprinkle mozzarella cheese over the pizza. Cook in oven at 400F.', 5, 15),
 (1, 7, 'Yogurt', 'Create marinade using yogurt, ginger, garlic, and spices.', 10, 0),
 (2, 7, 'Chicken Thighs', 'Marinate chicken thighs in yogurt, ginger, garlic, and spices for at least 2 hours, or overnight.', 120, 0),
 (3, 7, 'Olive Oil', 'Heat oil in a pan and sear marinated chicken until golden brown.', 10, 15),
@@ -670,15 +658,11 @@ INTO RECIPESTEP
 (9, 7, 'Cilantro', 'Garnish with chopped cilantro before serving.', 5, 0),
 (1, 8, 'Ground Beef', 'Slice beef sirloin thinly for stir-frying.', 15, 0),
 (2, 8, 'Broccoli', 'Cut broccoli into florets for the stir-fry.', 10, 0),
-(3, 8, 'Oil', 'Stir-fry beef and broccoli in choice of oil.', 10, 5),
+(3, 8, 'Olive Oil', 'Stir-fry beef and broccoli in choice of oil.', 10, 5),
 (4, 8, 'Ground Ginger', 'Finely chop ginger for the stir-fry.', 5, 0),
-(5, 8, 'Garlic Powder', 'Mince garlic for the stir-fry.', 5, 0),
-(6, 8, 'Olive Oil', 'Add sesame oil to a hot wok or pan.', 5, 0),
-(7, 8, 'Ground Beef', 'Stir-fry sliced beef until browned. Remove from the pan.', 15, 0),
-(8, 8, 'Broccoli', 'Add broccoli florets to the pan and stir-fry until tender-crisp.', 8, 5),
+(5, 8, 'Garlic Powder', 'Mince garlic for the stir-fry then add broccoli.', 13, 5),
 (9, 8, 'Soy Sauce', 'Mix soy sauce, brown sugar, and rice vinegar. Pour over beef and broccoli.', 5, 5),
 (10, 8, 'Potato', 'Dissolve cornstarch in water and add to the stir-fry for thickness.', 5, 3),
-(11, 8, 'Garlic Powder', 'Add minced garlic and stir-fry for an additional 2 minutes.', 5, 2),
 (1, 9, 'Pasta', 'Boil lasagna noodles until al dente.', 10, 0),
 (2, 9, 'Cheese', 'Spread ricotta cheese (or vegan cheese) over the cooked lasagna noodles.', 5, 0),
 (3, 9, 'Spinach', 'Layer spinach over the cheese. Cook in oven until cheese is melted.', 8, 10),
@@ -690,16 +674,15 @@ INTO RECIPESTEP
 (6, 10, 'Salt', 'Sprinkle salt to taste.', 1, 0),
 (7, 10, 'Pepper', 'Add freshly ground black pepper.', 1, 0),
 (1, 11, 'Salmon', 'Marinate salmon fillets in a mixture of soy sauce, mirin, brown sugar, and ginger for 30 minutes.', 30, 0),
-(2, 11, 'Oil', 'Heat a pan with oil and sear the marinated salmon until cooked through.', 5, 10),
-(3, 11, 'Sauce', 'In a separate saucepan, simmer the remaining marinade until it thickens. Pour over the cooked salmon.', 5, 5),
-(1, 12, 'Pasta', 'Cook spaghetti according to package instructions.', 10, 0),
+(2, 11, 'Olive Oil', 'Heat a pan with oil and sear the marinated salmon until cooked through.', 5, 10),
+(3, 11, 'Soy Sauce', 'In a separate saucepan, simmer the remaining marinade until it thickens.', 5, 5),
+(1, 12, 'Pasta', 'Cook spaghetti according to package instructions. Add to salmon + sauce.', 10, 0),
 (2, 12, 'Tomatoes', 'Dice tomatoes and mix with fresh mozzarella and basil.', 8, 0),
-(3, 12, 'Mixture', 'Toss the tomato, mozzarella, and basil mixture with the cooked spaghetti.', 5, 0),
+(3, 12, 'Cheese', 'Toss the tomato, mozzarella, and basil mixture with the cooked spaghetti.', 5, 0),
 (1, 13, 'Ground Beef', 'Sear beef tenderloin on high heat until browned on all sides.', 10, 0),
 (2, 13, 'Mushrooms', 'Saute mushrooms in the same pan until golden brown.', 5, 5),
 (3, 13, 'Pork Chops', 'Layer prosciutto over the beef tenderloin.', 5, 0),
-(4, 13, 'Puff Pastry', 'Wrap the beef, mushrooms, and prosciutto in puff pastry.', 15, 25),
-(5, 13, 'Puff Pastry', 'Bake in the oven until the pastry is golden brown and the beef is cooked to your liking.', 15, 25),
+(4, 13, 'Puff Pastry', 'Wrap the beef, mushrooms, and prosciutto in puff pastry and cook to liking.', 15, 55),
 (1, 14, 'Alfredo Sauce', 'Roll out pizza dough and spread Alfredo sauce over it.', 15, 0),
 (2, 14, 'Chicken Breast', 'Grill or pan-fry chicken breast until fully cooked. Slice into strips.', 15, 0),
 (3, 14, 'Cheese', 'Top the pizza with chicken strips and mozzarella cheese.', 5, 15),
