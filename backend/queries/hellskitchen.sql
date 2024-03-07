@@ -6,17 +6,22 @@ USE HELLSKITCHEN;
 CREATE TABLE
 IF NOT EXISTS INGREDIENT
 (
-	ingredient_name VARCHAR(50),
-    ingredient_type VARCHAR(50),
+	ingredient_name VARCHAR
+(50),
+    ingredient_type VARCHAR
+(50),
     ingredient_cost FLOAT,
-    PRIMARY KEY (ingredient_name)
+    PRIMARY KEY
+(ingredient_name)
 );
 
 CREATE TABLE
 IF NOT EXISTS RESTRICTION
 (
-	ingredient_name VARCHAR(50),
-	ingredient_type VARCHAR(50),
+	ingredient_name VARCHAR
+(50),
+	ingredient_type VARCHAR
+(50),
     is_vegan BOOLEAN,
     is_kosher BOOLEAN,
     is_gluten_free BOOLEAN,
@@ -25,63 +30,88 @@ IF NOT EXISTS RESTRICTION
     is_nut_free BOOLEAN,
     is_vegetarian BOOLEAN,
     is_pescatarian BOOLEAN,
-	PRIMARY KEY (ingredient_name, ingredient_type),
-    FOREIGN KEY (ingredient_name) REFERENCES INGREDIENT(ingredient_name)
+	PRIMARY KEY
+(ingredient_name, ingredient_type),
+    FOREIGN KEY
+(ingredient_name) REFERENCES INGREDIENT
+(ingredient_name)
 );
 
 CREATE TABLE
 IF NOT EXISTS INVENTORY
 (
-	ingredient_name VARCHAR(50),
+	ingredient_name VARCHAR
+(50),
     inventory_amt FLOAT,
-    PRIMARY KEY (ingredient_name),
-    FOREIGN KEY (ingredient_name) REFERENCES INGREDIENT(ingredient_name)
+    PRIMARY KEY
+(ingredient_name),
+    FOREIGN KEY
+(ingredient_name) REFERENCES INGREDIENT
+(ingredient_name)
 );
 
 CREATE TABLE
 IF NOT EXISTS NUTRITION
 (
-	ingredient_name VARCHAR(50),
+	ingredient_name VARCHAR
+(50),
 	sugar_amt FLOAT,
     fat_amt FLOAT,
     protein_amt FLOAT,
     carb_amt FLOAT,
-    PRIMARY KEY (ingredient_name),
-    FOREIGN KEY (ingredient_name) REFERENCES INGREDIENT(ingredient_name)
+    PRIMARY KEY
+(ingredient_name),
+    FOREIGN KEY
+(ingredient_name) REFERENCES INGREDIENT
+(ingredient_name)
 );
 
 CREATE TABLE
 IF NOT EXISTS FLAVORPROFILE
 (
-	ingredient_name VARCHAR(50),
+	ingredient_name VARCHAR
+(50),
     is_bitter BOOLEAN,
     is_sweet BOOLEAN,
     is_salty BOOLEAN,
     is_sour BOOLEAN,
     is_umami BOOLEAN,
-	PRIMARY KEY (ingredient_name),
-    FOREIGN KEY (ingredient_name) REFERENCES INGREDIENT(ingredient_name)
+	PRIMARY KEY
+(ingredient_name),
+    FOREIGN KEY
+(ingredient_name) REFERENCES INGREDIENT
+(ingredient_name)
 );
 
 CREATE TABLE
 IF NOT EXISTS RECIPE
 (
 	recipe_id INT,
-    difficulty VARCHAR(15),
-    recipe_name VARCHAR(50),
-    origin VARCHAR(50),
-    PRIMARY KEY (recipe_id)
+    difficulty VARCHAR
+(15),
+    recipe_name VARCHAR
+(50),
+    origin VARCHAR
+(50),
+    PRIMARY KEY
+(recipe_id)
 );
 
 CREATE TABLE
 IF NOT EXISTS INGREDIENTLIST
 (
 	recipe_id INT,
-	ingredient_name VARCHAR(50),
+	ingredient_name VARCHAR
+(50),
     ingredient_amt FLOAT,
-    PRIMARY KEY (recipe_id, ingredient_name),
-    FOREIGN KEY (ingredient_name) REFERENCES INGREDIENT(ingredient_name),
-    FOREIGN KEY (recipe_id) REFERENCES RECIPE(recipe_id)
+    PRIMARY KEY
+(recipe_id, ingredient_name),
+    FOREIGN KEY
+(ingredient_name) REFERENCES INGREDIENT
+(ingredient_name),
+    FOREIGN KEY
+(recipe_id) REFERENCES RECIPE
+(recipe_id)
 );
 
 CREATE TABLE
@@ -89,13 +119,20 @@ IF NOT EXISTS RECIPESTEP
 (
 	step_number INT,
     recipe_id INT,
-    ingredient_name VARCHAR(50),
-    step_descript VARCHAR(100),
+    ingredient_name VARCHAR
+(50),
+    step_descript VARCHAR
+(100),
     prep_time INT,
     cook_time INT,
-	PRIMARY KEY(recipe_id, ingredient_name),
-    FOREIGN KEY (recipe_id) REFERENCES RECIPE(recipe_id),
-    FOREIGN KEY(ingredient_name) REFERENCES INGREDIENT(ingredient_name)
+	PRIMARY KEY
+(recipe_id, ingredient_name),
+    FOREIGN KEY
+(recipe_id) REFERENCES RECIPE
+(recipe_id),
+    FOREIGN KEY
+(ingredient_name) REFERENCES INGREDIENT
+(ingredient_name)
 );
 
 -- insert into ingredient
@@ -335,6 +372,16 @@ VALUES
     ('Mushrooms', 0.3, 0.1, 0.3, 0.6),
     ('Water', 0, 0, 0, 0);
 
+INSERT INTO INGREDIENT (ingredient_name, ingredient_type, ingredient_cost) VALUES
+('Almonds', 'Nuts', 3.99),
+('Apple', 'Fruit', 0.99),
+('Basil', 'Spice', 1.99),
+('Carrot', 'Vegetable', 0.99),
+('Milk', 'Dairy', 4.99),
+('Olive Oil', 'Oil', 4.99),
+('Rice', 'Grain', 3.99),
+('Tomato Sauce', 'Sauce', 3.99);
+
 INSERT INTO FLAVORPROFILE
     (ingredient_name, is_bitter, is_sweet, is_salty, is_sour, is_umami)
 VALUES
@@ -421,6 +468,12 @@ VALUES
     ('Yogurt', FALSE, TRUE, FALSE, TRUE, FALSE),
     ('Zucchini', TRUE, TRUE, FALSE, FALSE, FALSE);
 
+INSERT INTO INGREDIENT (ingredient_name, ingredient_type, ingredient_cost) VALUES
+('Spaghetti', 'Pasta', 2.99),
+('Salt', 'Spice', 0.99),
+('Fettuccine', 'Pasta', 2.99),
+('Alfredo Sauce', 'Sauce', 3.99);
+
 INSERT INTO INGREDIENTLIST
     (recipe_id, ingredient_name, ingredient_amt)
 VALUES
@@ -431,9 +484,9 @@ VALUES
     (2, 'Chicken Breast', 400.0),
     (2, 'Fettuccine', 300.0),
     (2, 'Alfredo Sauce', 500.0),
-    (44, 'Cheese', 44),
-    (44, 'Pasta', 80),
-    (44, 'Water', 800);
+    (44, 'Cheese', 44.0),
+    (44, 'Pasta', 80.0),
+    (44, 'Water', 800.0);
 
 INSERT INTO RECIPESTEP
     (step_number, recipe_id, ingredient_name, step_descript, prep_time, cook_time)
@@ -445,91 +498,7 @@ VALUES
     (1, 2, 'Salt', 'Season raw chicken with seasonings, usually salt and pepper. Optionally let sit overnight.', 5, 0),
     (2, 2, 'Chicken Breast', 'Grill or pan-fry chicken breast until fully cooked, 150-160 degrees farenheit. Let cool.', 5, 15),
     (3, 2, 'Fettuccine', 'Cook fettuccine according to package instructions.', 1, 10),
-    (3, 2, 'Alfredo Sauce', 'Add fetticcine to pan or pot with alfredo and mix thoroughly. Add cookied and cut chicken. Season to taste.', 1, 10);
-
-    
-INSERT INTO FLAVORPROFILE (ingredient_name, is_bitter, is_sweet, is_salty, is_sour, is_umami) VALUES
-('Almonds', FALSE, TRUE, FALSE, FALSE, FALSE),
-('Apple', FALSE, TRUE, FALSE, TRUE, FALSE),
-('Avocado', FALSE, FALSE, FALSE, FALSE, TRUE),
-('Banana', FALSE, TRUE, FALSE, TRUE, FALSE),
-('Barley', FALSE, FALSE, FALSE, FALSE, FALSE),
-('Basil', TRUE, FALSE, FALSE, TRUE, FALSE),
-('Bay Leaves', TRUE, FALSE, FALSE, TRUE, FALSE),
-('Bell Pepper', FALSE, TRUE, FALSE, FALSE, FALSE),
-('Bread', FALSE, TRUE, TRUE, FALSE, FALSE),
-('Broccoli', TRUE, FALSE, FALSE, FALSE, FALSE),
-('Butter', FALSE, FALSE, TRUE, FALSE, FALSE),
-('Canned Beans', FALSE, FALSE, TRUE, FALSE, TRUE),
-('Canned Black Beans', FALSE, FALSE, TRUE, FALSE, TRUE),
-('Canned Chickpeas', FALSE, FALSE, TRUE, FALSE, TRUE),
-('Canned Corn', FALSE, TRUE, TRUE, FALSE, FALSE),
-('Canned Green Beans', FALSE, FALSE, TRUE, FALSE, FALSE),
-('Canned Peaches', FALSE, TRUE, FALSE, TRUE, FALSE),
-('Canned Peas', FALSE, TRUE, TRUE, FALSE, FALSE),
-('Canned Pineapple', FALSE, TRUE, FALSE, TRUE, FALSE),
-('Canned Salmon', TRUE, FALSE, TRUE, FALSE, FALSE),
-('Canned Tomatoes', TRUE, TRUE, TRUE, TRUE, TRUE),
-('Canned Tuna', TRUE, FALSE, TRUE, FALSE, TRUE),
-('Cardamom', FALSE, TRUE, FALSE, FALSE, FALSE),
-('Carrot', FALSE, TRUE, FALSE, FALSE, FALSE),
-('Cayenne Pepper', TRUE, FALSE, FALSE, FALSE, FALSE),
-('Cheese', FALSE, FALSE, TRUE, FALSE, TRUE),
-('Chia Seeds', TRUE, TRUE, FALSE, FALSE, FALSE),
-('Chicken Breast', FALSE, FALSE, TRUE, FALSE, TRUE),
-('Chicken Thighs', FALSE, FALSE, TRUE, FALSE, TRUE),
-('Chili Powder', TRUE, FALSE, FALSE, FALSE, TRUE),
-('Cilantro', TRUE, FALSE, FALSE, FALSE, TRUE),
-('Cinnamon', FALSE, TRUE, FALSE, FALSE, FALSE),
-('Coriander', TRUE, FALSE, FALSE, TRUE, FALSE),
-('Couscous', FALSE, FALSE, FALSE, FALSE, TRUE),
-('Crushed Red Pepper', TRUE, FALSE, FALSE, FALSE, TRUE),
-('Cucumber', FALSE, FALSE, FALSE, FALSE, FALSE),
-('Cumin', TRUE, FALSE, FALSE, FALSE, TRUE),
-('Dill', TRUE, TRUE, FALSE, TRUE, TRUE),
-('Garlic Powder', TRUE, FALSE, FALSE, FALSE, TRUE),
-('Grapes', FALSE, TRUE, FALSE, TRUE, FALSE),
-('Ground Beef', FALSE, FALSE, TRUE, FALSE, TRUE),
-('Ground Ginger', TRUE, TRUE, FALSE, TRUE, TRUE),
-('Ground Pork', FALSE, FALSE, TRUE, FALSE, TRUE),
-('Ground Turkey', FALSE, FALSE, TRUE, FALSE, TRUE),
-('Ground Turmeric', TRUE, FALSE, FALSE, FALSE, TRUE),
-('Honey', FALSE, TRUE, FALSE, FALSE, FALSE),
-('Ketchup', FALSE, TRUE, TRUE, TRUE, TRUE),
-('Lamb Chops', FALSE, FALSE, TRUE, FALSE, TRUE),
-('Mango', FALSE, TRUE, FALSE, TRUE, FALSE),
-('Milk', FALSE, TRUE, FALSE, FALSE, FALSE),
-('Mushrooms', TRUE, FALSE, FALSE, FALSE, TRUE),
-('Mustard', TRUE, TRUE, TRUE, TRUE, TRUE),
-('Nutmeg', TRUE, TRUE, FALSE, FALSE, FALSE),
-('Oats', TRUE, TRUE, FALSE, FALSE, FALSE),
-('Olive Oil', TRUE, FALSE, FALSE, FALSE, FALSE),
-('Onion', TRUE, TRUE, FALSE, TRUE, TRUE),
-('Onion Powder', TRUE, TRUE, FALSE, TRUE, TRUE),
-('Oregano', TRUE, FALSE, FALSE, FALSE, TRUE),
-('Paprika', FALSE, TRUE, FALSE, FALSE, FALSE),
-('Parsley', TRUE, FALSE, FALSE, FALSE, FALSE),
-('Pasta', FALSE, FALSE, FALSE, FALSE, FALSE),
-('Pineapple', FALSE, TRUE, FALSE, TRUE, FALSE),
-('Pork Chops', FALSE, FALSE, TRUE, FALSE, TRUE),
-('Quinoa', TRUE, FALSE, TRUE, FALSE, FALSE),
-('Rice', FALSE, FALSE, TRUE, FALSE, FALSE),
-('Rosemary', TRUE, FALSE, FALSE, FALSE, FALSE),
-('Sage', TRUE, FALSE, FALSE, FALSE, TRUE),
-('Salmon', FALSE, FALSE, TRUE, FALSE, TRUE),
-('Shrimp', FALSE, FALSE, TRUE, FALSE, TRUE),
-('Sirloin Steak', FALSE, FALSE, TRUE, FALSE, FALSE),
-('Soy Sauce', FALSE, FALSE, TRUE, TRUE, TRUE),
-('Spinach', TRUE, FALSE, FALSE, FALSE, FALSE),
-('Strawberries', FALSE, TRUE, FALSE, TRUE, FALSE),
-('Thyme', TRUE, FALSE, FALSE, FALSE, FALSE),
-('Tilapia', FALSE, FALSE, TRUE, FALSE, TRUE),
-('Tomato Sauce', TRUE, TRUE, TRUE, TRUE, TRUE),
-('Turkey Breast', FALSE, FALSE, TRUE, FALSE, TRUE),
-('Turmeric', TRUE, FALSE, FALSE, FALSE, FALSE),
-('Water', FALSE, FALSE, FALSE, FALSE, TRUE),
-('Yogurt', FALSE, TRUE, FALSE, TRUE, FALSE),
-('Zucchini', TRUE, TRUE, FALSE, FALSE, FALSE);
+    (3, 2, 'Alfredo Sauce', 'Add fetticcine to pot with alfredo and mix thoroughly. Add cut chicken. Season to taste.', 1, 10);
 
 INSERT INTO RECIPE (recipe_id, difficulty, recipe_name, origin) VALUES
 (44, 'Easy', 'Mac n Cheese', 'USA'),
@@ -551,7 +520,7 @@ INSERT INTO RECIPE (recipe_id, difficulty, recipe_name, origin) VALUES
 (15, 'Easy', 'Avocado Shrimp Salad', 'International'),
 (16, 'Easy', 'Pepperoni Pizza', 'Italian');
 
-INSERT INTO INGREDIENTLIST (recipe_id, ingredient_name, ingredient_amt) VALUES
+INSERT IGNORE INTO INGREDIENTLIST (recipe_id, ingredient_name, ingredient_amt) VALUES
 (1, 'Spaghetti', 250.0),
 (1, 'Ground Beef', 500.0),
 (1, 'Tomato Sauce', 700.0),
@@ -627,7 +596,7 @@ INSERT INTO INGREDIENTLIST (recipe_id, ingredient_name, ingredient_amt) VALUES
 (15, 'Lime', 1.0),
 (15, 'Olive Oil', 30.0);
 
-INSERT INTO RECIPESTEP (step_number, recipe_id, ingredient_name, step_descript, prep_time, cook_time) VALUES
+INSERT IGNORE INTO RECIPESTEP (step_number, recipe_id, ingredient_name, step_descript, prep_time, cook_time) VALUES
 (1, 1, 'Spaghetti', 'Boil spaghetti according to package instructions, until just before al dente.', 1, 10),
 (2, 1, 'Ground Beef', 'Cook ground beef until browned.', 1, 10),
 (3, 1, 'Salt', 'Season ground beef with choice of seasonings, usually salt and pepper.', 1, 0),
@@ -711,5 +680,3 @@ INSERT INTO RECIPESTEP (step_number, recipe_id, ingredient_name, step_descript, 
 (4, 16, 'Mozzarella Cheese', 'Add large chunks of mozzarella cheese to wherever desired', 1, 0),
 (5, 16, 'Pork Chops', 'Add pepperoni slices to the pizza wherever desired', 1, 0),
 (5, 16, 'Basil', 'Add some basil and then cook in the oven at 450 degrees F', 1, 20);
-    
-
