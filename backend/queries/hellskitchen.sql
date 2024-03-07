@@ -6,22 +6,17 @@ USE HELLSKITCHEN;
 CREATE TABLE
 IF NOT EXISTS INGREDIENT
 (
-	ingredient_name VARCHAR
-(50),
-    ingredient_type VARCHAR
-(50),
+	ingredient_name VARCHAR(50),
+    ingredient_type VARCHAR(50),
     ingredient_cost FLOAT,
-    PRIMARY KEY
-(ingredient_name)
+    PRIMARY KEY (ingredient_name)
 );
 
 CREATE TABLE
 IF NOT EXISTS RESTRICTION
 (
-	ingredient_name VARCHAR
-(50),
-	ingredient_type VARCHAR
-(50),
+	ingredient_name VARCHAR(50),
+	ingredient_type VARCHAR(50),
     is_vegan BOOLEAN,
     is_kosher BOOLEAN,
     is_gluten_free BOOLEAN,
@@ -30,88 +25,63 @@ IF NOT EXISTS RESTRICTION
     is_nut_free BOOLEAN,
     is_vegetarian BOOLEAN,
     is_pescatarian BOOLEAN,
-	PRIMARY KEY
-(ingredient_name, ingredient_type),
-    FOREIGN KEY
-(ingredient_name) REFERENCES INGREDIENT
-(ingredient_name)
+	PRIMARY KEY (ingredient_name, ingredient_type),
+    FOREIGN KEY (ingredient_name) REFERENCES INGREDIENT(ingredient_name)
 );
 
 CREATE TABLE
 IF NOT EXISTS INVENTORY
 (
-	ingredient_name VARCHAR
-(50),
+	ingredient_name VARCHAR(50),
     inventory_amt FLOAT,
-    PRIMARY KEY
-(ingredient_name),
-    FOREIGN KEY
-(ingredient_name) REFERENCES INGREDIENT
-(ingredient_name)
+    PRIMARY KEY (ingredient_name),
+    FOREIGN KEY (ingredient_name) REFERENCES INGREDIENT(ingredient_name)
 );
 
 CREATE TABLE
 IF NOT EXISTS NUTRITION
 (
-	ingredient_name VARCHAR
-(50),
+	ingredient_name VARCHAR(50),
 	sugar_amt FLOAT,
     fat_amt FLOAT,
     protein_amt FLOAT,
     carb_amt FLOAT,
-    PRIMARY KEY
-(ingredient_name),
-    FOREIGN KEY
-(ingredient_name) REFERENCES INGREDIENT
-(ingredient_name)
+    PRIMARY KEY (ingredient_name),
+    FOREIGN KEY (ingredient_name) REFERENCES INGREDIENT(ingredient_name)
 );
 
 CREATE TABLE
 IF NOT EXISTS FLAVORPROFILE
 (
-	ingredient_name VARCHAR
-(50),
+	ingredient_name VARCHAR(50),
     is_bitter BOOLEAN,
     is_sweet BOOLEAN,
     is_salty BOOLEAN,
     is_sour BOOLEAN,
     is_umami BOOLEAN,
-	PRIMARY KEY
-(ingredient_name),
-    FOREIGN KEY
-(ingredient_name) REFERENCES INGREDIENT
-(ingredient_name)
+	PRIMARY KEY (ingredient_name),
+    FOREIGN KEY (ingredient_name) REFERENCES INGREDIENT(ingredient_name)
 );
 
 CREATE TABLE
 IF NOT EXISTS RECIPE
 (
 	recipe_id INT,
-    difficulty VARCHAR
-(15),
-    recipe_name VARCHAR
-(50),
-    origin VARCHAR
-(50),
-    PRIMARY KEY
-(recipe_id)
+    difficulty VARCHAR(15),
+    recipe_name VARCHAR(50),
+    origin VARCHAR(50),
+    PRIMARY KEY (recipe_id)
 );
 
 CREATE TABLE
 IF NOT EXISTS INGREDIENTLIST
 (
 	recipe_id INT,
-	ingredient_name VARCHAR
-(50),
+	ingredient_name VARCHAR(50),
     ingredient_amt FLOAT,
-    PRIMARY KEY
-(recipe_id, ingredient_name),
-    FOREIGN KEY
-(ingredient_name) REFERENCES INGREDIENT
-(ingredient_name),
-    FOREIGN KEY
-(recipe_id) REFERENCES RECIPE
-(recipe_id)
+    PRIMARY KEY (recipe_id, ingredient_name),
+    FOREIGN KEY (ingredient_name) REFERENCES INGREDIENT(ingredient_name),
+    FOREIGN KEY (recipe_id) REFERENCES RECIPE(recipe_id)
 );
 
 CREATE TABLE
@@ -119,20 +89,13 @@ IF NOT EXISTS RECIPESTEP
 (
 	step_number INT,
     recipe_id INT,
-    ingredient_name VARCHAR
-(50),
-    step_descript VARCHAR
-(100),
+    ingredient_name VARCHAR(50),
+    step_descript VARCHAR(100),
     prep_time INT,
     cook_time INT,
-	PRIMARY KEY
-(recipe_id, ingredient_name),
-    FOREIGN KEY
-(recipe_id) REFERENCES RECIPE
-(recipe_id),
-    FOREIGN KEY
-(ingredient_name) REFERENCES INGREDIENT
-(ingredient_name)
+	PRIMARY KEY(recipe_id, ingredient_name),
+    FOREIGN KEY (recipe_id) REFERENCES RECIPE(recipe_id),
+    FOREIGN KEY(ingredient_name) REFERENCES INGREDIENT(ingredient_name)
 );
 
 -- insert into ingredient
