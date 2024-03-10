@@ -126,7 +126,7 @@ IF NOT EXISTS RECIPESTEP
     prep_time INT,
     cook_time INT,
 	PRIMARY KEY
-(recipe_id, ingredient_name),
+(recipe_id, step_number),
     FOREIGN KEY
 (recipe_id) REFERENCES RECIPE
 (recipe_id),
@@ -633,7 +633,7 @@ INTO RECIPESTEP
 (1, 2, 'Salt', 'Season raw chicken with seasonings, usually salt and pepper. Optionally let sit overnight.', 5, 0),
 (2, 2, 'Chicken Breast', 'Grill or pan-fry chicken breast until fully cooked, 150-160 degrees farenheit. Let cool.', 5, 15),
 (3, 2, 'Pasta', 'Cook fettuccine according to package instructions.', 1, 10),
-(3, 2, 'Alfredo Sauce', 'Add fetticcine to pan or pot with alfredo and mix thoroughly. Add chicken.', 1, 10),
+(4, 2, 'Alfredo Sauce', 'Add fetticcine to pan or pot with alfredo and mix thoroughly. Add chicken.', 1, 10),
 (1, 44, 'Water', 'Begin to boil water.', 0, 7.5),
 (2, 44, 'Pasta', 'Place pasta into the boiling water.', 0, 15),
 (3, 44, 'Cheese', 'Melt cheese and pour it over the pasta when it is finished', 2, 0),
@@ -702,4 +702,4 @@ INTO RECIPESTEP
 (3, 16, 'Tomato Sauce', 'Add tomato sauce on top of the completed dough', 2, 0),
 (4, 16, 'Cheese', 'Add large chunks of mozzarella cheese to wherever desired', 1, 0),
 (5, 16, 'Pork Chops', 'Add pepperoni slices to the pizza wherever desired', 1, 0),
-(5, 16, 'Basil', 'Add some basil and then cook in the oven at 450 degrees F', 1, 20);
+(6, 16, 'Basil', 'Add some basil and then cook in the oven at 450 degrees F', 1, 20);
