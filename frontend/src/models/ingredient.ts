@@ -4,10 +4,7 @@ export interface Ingredient {
   ingredient_cost: string;
 }
 
-export interface IngredientFull {
-  ingredient_name: string;
-  ingredient_type: string;
-  ingredient_cost: string;
+export interface IngredientFull extends Ingredient {
   is_vegan: number;
   is_kosher: number;
   is_gluten_free: number;
@@ -25,4 +22,8 @@ export interface IngredientFull {
   is_salty: number;
   is_sour: number;
   is_umami: number;
+}
+
+export interface IngredientRow extends IngredientFull {
+  id: number
 }

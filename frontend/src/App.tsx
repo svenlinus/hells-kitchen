@@ -7,15 +7,21 @@ import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
+    primary: {
+      // dark: 'rgb(51, 116, 255)',
+      main: '#ee4d4d'
+    }
   },
 });
 
 function App() {
   return (
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      <IngredientsSearch />
-    </ThemeProvider>
+    <div className="main">
+      <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
+        <IngredientsSearch />
+      </ThemeProvider>
+    </div>
   )
 }
 
