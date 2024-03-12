@@ -4,45 +4,43 @@ CREATE DATABASE HELLSKITCHEN;
 USE HELLSKITCHEN;
 
 CREATE TABLE
-IF NOT EXISTS INGREDIENT
+IF NOT EXISTS RESTRICTION
 (
-	ingredient_name VARCHAR
-(50),
-    ingredient_type VARCHAR
-(50),
-    ingredient_cost FLOAT,
-    PRIMARY KEY
-(ingredient_name)
+	ingredient_type VARCHAR
+(50) NOT NULL,
+    is_vegan BOOLEAN NOT NULL,
+    is_kosher BOOLEAN NOT NULL,
+    is_gluten_free BOOLEAN NOT NULL,
+    is_dairy_free BOOLEAN NOT NULL,
+    is_halal BOOLEAN NOT NULL,
+    is_nut_free BOOLEAN NOT NULL,
+    is_vegetarian BOOLEAN NOT NULL,
+    is_pescatarian BOOLEAN NOT NULL,
+	PRIMARY KEY
+(ingredient_type)
 );
 
 CREATE TABLE
-IF NOT EXISTS RESTRICTION
+IF NOT EXISTS INGREDIENT
 (
 	ingredient_name VARCHAR
-(50),
-	ingredient_type VARCHAR
-(50),
-    is_vegan BOOLEAN,
-    is_kosher BOOLEAN,
-    is_gluten_free BOOLEAN,
-    is_dairy_free BOOLEAN,
-    is_halal BOOLEAN,
-    is_nut_free BOOLEAN,
-    is_vegetarian BOOLEAN,
-    is_pescatarian BOOLEAN,
-	PRIMARY KEY
-(ingredient_name, ingredient_type),
-    FOREIGN KEY
-(ingredient_name) REFERENCES INGREDIENT
-(ingredient_name)
+(50) NOT NULL,
+    ingredient_type VARCHAR
+(50) NOT NULL,
+    ingredient_cost FLOAT NOT NULL,
+    PRIMARY KEY
+(ingredient_name),
+	FOREIGN KEY 
+(ingredient_type) REFERENCES RESTRICTION
+(ingredient_type)
 );
 
 CREATE TABLE
 IF NOT EXISTS INVENTORY
 (
 	ingredient_name VARCHAR
-(50),
-    inventory_amt FLOAT,
+(50) NOT NULL,
+    inventory_amt FLOAT DEFAULT 0,
     PRIMARY KEY
 (ingredient_name),
     FOREIGN KEY
@@ -54,11 +52,11 @@ CREATE TABLE
 IF NOT EXISTS NUTRITION
 (
 	ingredient_name VARCHAR
-(50),
-	sugar_amt FLOAT,
-    fat_amt FLOAT,
-    protein_amt FLOAT,
-    carb_amt FLOAT,
+(50) NOT NULL,
+	sugar_amt FLOAT DEFAULT 0,
+    fat_amt FLOAT DEFAULT 0,
+    protein_amt FLOAT DEFAULT 0,
+    carb_amt FLOAT DEFAULT 0,
     PRIMARY KEY
 (ingredient_name),
     FOREIGN KEY
@@ -70,12 +68,12 @@ CREATE TABLE
 IF NOT EXISTS FLAVORPROFILE
 (
 	ingredient_name VARCHAR
-(50),
-    is_bitter BOOLEAN,
-    is_sweet BOOLEAN,
-    is_salty BOOLEAN,
-    is_sour BOOLEAN,
-    is_umami BOOLEAN,
+(50) NOT NULL,
+    is_bitter BOOLEAN NOT NULL,
+    is_sweet BOOLEAN NOT NULL,
+    is_salty BOOLEAN NOT NULL,
+    is_sour BOOLEAN NOT NULL,
+    is_umami BOOLEAN NOT NULL,
 	PRIMARY KEY
 (ingredient_name),
     FOREIGN KEY
@@ -86,13 +84,13 @@ IF NOT EXISTS FLAVORPROFILE
 CREATE TABLE
 IF NOT EXISTS RECIPE
 (
-	recipe_id INT,
+	recipe_id INT NOT NULL,
     difficulty VARCHAR
-(15),
+(15) DEFAULT 'Easy',
     recipe_name VARCHAR
-(50),
+(50) NOT NULL,
     origin VARCHAR
-(50),
+(50) NULL,
     PRIMARY KEY
 (recipe_id)
 );
@@ -135,11 +133,29 @@ IF NOT EXISTS RECIPESTEP
 (ingredient_name)
 );
 
+-- insert into RESTRICTION
+INSERT INTO RESTRICTION
+    (ingredient_type, is_vegan, is_kosher, is_gluten_free, is_dairy_free, is_halal, is_nut_free, is_vegetarian, is_pescatarian)
+VALUES
+    ('Meat', false, false, true, true, false, true, false, false),
+    ('Vegetable', true, true, true, true, true, true, true, true),
+    ('Seafood', false, true, true, true, true, true, false, true),
+    ('Fruit', true, true, true, true, true, true, true, true),
+    ('Grain', true, true, true, true, true, true, true, true),
+    ('Dairy', false, true, true, false, true, true, true, true),
+    ('Condiment', true, true, false, true, true, true, true, true),
+    ('Spice', true, true, true, true, true, true, true, true),
+    ('Nut', true, true, true, true, true, false, true, true),
+    ('Canned Good', false, true, true, true, true, true, false, true),
+    ('Broth', false, true, true, false, true, true, true, true),
+    ('Sauce', false, true, true, false, true, true, true, true),
+    ('Oil', true, true, true, true, true, true, true, true);
+
 -- insert into ingredient
 INSERT INTO INGREDIENT
     (ingredient_name, ingredient_type, ingredient_cost)
 VALUES
-    ('Almonds', 'Nuts', 3.99),
+    ('Almonds', 'Nut', 3.99),
     ('Apple', 'Fruit', 0.99),
     ('Basil', 'Spice', 1.99),
     ('Carrot', 'Vegetable', 0.99),
@@ -233,100 +249,6 @@ VALUES
     ('Mushrooms', 'Vegetable', 3.25),
     ('Water', 'Broth', 0.0),
     ('Alfredo Sauce', 'Broth', 2.00);
-
-
--- insert into RESTRICTION
-INSERT INTO RESTRICTION
-    (ingredient_name, ingredient_type, is_vegan, is_kosher, is_gluten_free, is_dairy_free, is_halal, is_nut_free, is_vegetarian, is_pescatarian)
-VALUES
-    ('Chicken Breast', 'Meat', false, false, true, true, true, true, false, false),
-    ('Tofu', 'Vegetable', true, true, true, true, true, true, true, true),
-    ('Salmon', 'Seafood', false, true, true, true, true, true, false, true),
-    ('Pork Chops', 'Meat', false, false, true, true, false, true, false, false),
-    ('Potato', 'Vegetable', true, true, true, true, true, true, true, true),
-    ('Shrimp', 'Seafood', false, false, true, true, false, true, false, true),
-    ('Ground Beef', 'Meat', false, false, true, true, false, true, false, false),
-    ('Ground Turkey', 'Meat', false, true, true, true, true, true, false, false),
-    ('Lamb Chops', 'Meat', false, true, true, true, true, true, false, false),
-    ('Turkey Breast', 'Meat', false, true, true, true, true, true, false, false),
-    ('Sirloin Steak', 'Meat', false, false, true, true, false, true, false, false),
-    ('Ground Pork', 'Meat', false, false, true, true, false, true, false, false),
-    ('Tilapia', 'Seafood', false, true, true, true, true, true, false, true),
-    ('Chicken Thighs', 'Meat', false, false, true, true, true, true, false, false),
-    ('Broccoli', 'Vegetable', true, true, true, true, true, true, true, true),
-    ('Bell Pepper', 'Vegetable', true, true, true, true, true, true, true, true),
-    ('Zucchini', 'Vegetable', true, true, true, true, true, true, true, true),
-    ('Spinach', 'Vegetable', true, true, true, true, true, true, true, true),
-    ('Cucumber', 'Vegetable', true, true, true, true, true, true, true, true),
-    ('Onion', 'Vegetable', true, true, true, true, true, true, true, true),
-    ('Mixed Greens', 'Vegetable', true, true, true, true, true, true, true, true),
-    ('Banana', 'Fruit', true, true, true, true, true, true, true, true),
-    ('Strawberries', 'Fruit', true, true, true, true, true, true, true, true),
-    ('Mango', 'Fruit', true, true, true, true, true, true, true, true),
-    ('Grapes', 'Fruit', true, true, true, true, true, true, true, true),
-    ('Pineapple', 'Fruit', true, true, true, true, true, true, true, true),
-    ('Lime', 'Fruit', true, true, true, true, true, true, true, true),
-    ('Lemon', 'Fruit', true, true, true, true, true, true, true, true),
-    ('Avocado', 'Fruit', true, true, true, true, true, true, true, true),
-    ('Tomatoes', 'Fruit', true, true, true, true, true, true, true, true),
-    ('Quinoa', 'Grain', true, true, true, true, true, true, true, true),
-    ('Pasta', 'Grain', true, true, false, true, true, true, true, true),
-    ('Bread', 'Grain', true, true, false, true, true, true, true, true),
-    ('Oats', 'Grain', true, true, true, true, true, true, true, true),
-    ('Couscous', 'Grain', true, true, false, true, true, true, true, true),
-    ('Barley', 'Grain', true, true, false, true, true, true, true, true),
-    ('Pizza Dough', 'Grain', true, true, false, true, true, true, true, true),
-    ('Puff Pastry', 'Grain', true, true, false, true, true, true, true, true),
-    ('Cheese', 'Dairy', false, true, true, false, true, true, true, true),
-    ('Yogurt', 'Dairy', false, true, true, false, true, true, true, true),
-    ('Milk', 'Dairy', false, true, true, false, true, true, true, true),
-    ('Butter', 'Dairy', false, true, true, false, true, true, true, true),
-    ('Soy Sauce', 'Condiment', true, true, false, true, true, true, true, true),
-    ('Honey', 'Condiment', false, true, true, true, true, true, true, true),
-    ('Ketchup', 'Condiment', true, true, true, true, true, true, true, true),
-    ('Mustard', 'Condiment', true, true, true, true, true, true, true, true),
-    ('Cumin', 'Spice', true, true, true, true, true, true, true, true),
-    ('Thyme', 'Spice', true, true, true, true, true, true, true, true),
-    ('Rosemary', 'Spice', true, true, true, true, true, true, true, true),
-    ('Parsley', 'Spice', true, true, true, true, true, true, true, true),
-    ('Cilantro', 'Spice', true, true, true, true, true, true, true, true),
-    ('Oregano', 'Spice', true, true, true, true, true, true, true, true),
-    ('Dill', 'Spice', true, true, true, true, true, true, true, true),
-    ('Bay Leaves', 'Spice', true, true, true, true, true, true, true, true),
-    ('Sage', 'Spice', true, true, true, true, true, true, true, true),
-    ('Coriander', 'Spice', true, true, true, true, true, true, true, true),
-    ('Turmeric', 'Spice', true, true, true, true, true, true, true, true),
-    ('Cardamom', 'Spice', true, true, true, true, true, true, true, true),
-    ('Cinnamon', 'Spice', true, true, true, true, true, true, true, true),
-    ('Sugar', 'Spice', true, true, true, true, true, true, true, true),
-    ('Nutmeg', 'Condiment', true, true, true, true, true, false, true, true),
-    ('Paprika', 'Spice', true, true, true, true, true, true, true, true),
-    ('Chili Powder', 'Spice', true, true, true, true, true, true, true, true),
-    ('Garlic Powder', 'Spice', true, true, true, true, true, true, true, true),
-    ('Onion Powder', 'Spice', true, true, true, true, true, true, true, true),
-    ('Cayenne Pepper', 'Spice', true, true, true, true, true, true, true, true),
-    ('Pepper', 'Spice', true, true, true, true, true, true, true, true),
-    ('Ground Ginger', 'Spice', true, true, true, true, true, true, true, true),
-    ('Ground Turmeric', 'Spice', true, true, true, true, true, true, true, true),
-    ('Crushed Red Pepper', 'Spice', true, true, true, true, true, true, true, true),
-    ('Chia Seeds', 'Nut', true, true, true, true, true, false, true, true),
-    ('Canned Chickpeas', 'Canned Good', true, true, true, true, true, true, true, true),
-    ('Canned Corn', 'Canned Good', true, true, true, true, true, true, true, true),
-    ('Canned Tomatoes', 'Canned Good', true, true, true, true, true, true, true, true),
-    ('Canned Beans', 'Canned Good', true, true, true, true, true, true, true, true),
-    ('Canned Tuna', 'Canned Good', false, false, true, true, true, true, false, true),
-    ('Canned Salmon', 'Canned Good', false, true, true, true, true, true, false, true),
-    ('Canned Black Beans', 'Canned Good', true, true, true, true, true, true, true, true),
-    ('Canned Green Beans', 'Canned Good', true, true, true, true, true, true, true, true),
-    ('Canned Peas', 'Canned Good', true, true, true, true, true, true, true, true),
-    ('Canned Pineapple', 'Canned Good', true, true, true, true, true, true, true, true),
-    ('Canned Peaches', 'Canned Good', true, true, true, true, true, true, true, true),
-    ('Mushrooms', 'Vegetable', true, true, true, true, true, true, true, true),
-    ('Water', 'Broth', true, true, true, true, true, true, true, true),
-    ('Alfredo Sauce', 'Broth', false, true, true, false, true, true, true, true),
-    ('Olive Oil', 'Oil', true, true, true, true, true, true, true, true),
-    ('Balsamic Glaze', 'Oil', true, true, true, true, true, true, true, true),
-    ('Vinegar', 'Oil', true, true, true, true, true, true, true, true);
 
 -- insert into NUTRITION
 INSERT INTO NUTRITION
