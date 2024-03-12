@@ -21,6 +21,35 @@ app.listen(8800, () => {
   console.log("backend running on 8800");
 });
 
+app.get('/recipes', (req, res) => {
+  const ingredients = req.query.ingredients.split(',');
+
+  if (!ingredients || !Array.isArray(ingredients) || ingredients.length === 0) {
+    return res.status(400).json({ error: 'Invalid or missing ingredients in the request' });
+  }
+
+  const query = `
+    SELECT DISTINCT(ST.recipe_id), ST.recipe_name, ST.difficulty, ST.origin, ROUND(SUM(ingredient_cost), 2) as cost
+    FROM (
+      SELECT DISTINCT(RECIPE.recipe_id), recipe_name, difficulty, origin FROM RECIPE
+      JOIN INGREDIENTLIST ON RECIPE.recipe_id = INGREDIENTLIST.recipe_id
+      WHERE INGREDIENTLIST.ingredient_name IN (?)
+    ) ST
+    JOIN INGREDIENTLIST ON ST.recipe_id = INGREDIENTLIST.recipe_id
+    JOIN INGREDIENT ON INGREDIENTLIST.ingredient_name = INGREDIENT.ingredient_name
+    GROUP BY ST.recipe_id;
+  `;
+
+  db.query(query, [ingredients], (err, data) => {
+    if (err) {
+      console.error('Error executing MySQL query: ' + err.message);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+
+    res.json(data);
+  });
+});
+
 app.get("/ingredients", (request, response) => {
   const nameLike = request.query.name.toLowerCase();
   const q = nameLike 

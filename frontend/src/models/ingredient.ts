@@ -23,7 +23,3 @@ export interface IngredientFull extends Ingredient {
   is_sour: number;
   is_umami: number;
 }
-
-export interface IngredientRow extends IngredientFull {
-  id: number
-}

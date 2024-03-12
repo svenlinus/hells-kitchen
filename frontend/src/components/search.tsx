@@ -1,14 +1,16 @@
 
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import axios from 'axios';
-import { Ingredient, IngredientFull, IngredientRow } from '../models/ingredient';
+import { Ingredient, IngredientFull } from '../models/ingredient';
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid';
 import './search.css'
+import { Recipe } from '../models/recipe';
 
 const nutritionWidth = 140;
+const tableWidth = 1100;
 
-const columns: GridColDef[] = [
+const ingredientColumns: GridColDef[] = [
   { field: 'ingredient_name', headerName: 'Name', width: 200 },
   { field: 'ingredient_type', headerName: 'Type', width: 120 },
   { field: 'ingredient_cost', headerName: 'Cost', width: nutritionWidth, type: 'number' },
@@ -18,10 +20,19 @@ const columns: GridColDef[] = [
   { field: 'carb_amt', headerName: 'Carbs (g)', width: nutritionWidth, type: 'number' },
 ];
 
+const recipeColumns: GridColDef[] = [
+  { field: 'recipe_name', headerName: 'Name', width: tableWidth / 4 },
+  { field: 'difficulty', headerName: 'Difficulty', width: tableWidth / 4 },
+  { field: 'origin', headerName: 'Origin', width: tableWidth / 4 },
+  { field: 'cost', headerName: 'Cost', width: tableWidth / 4 }
+];
+
 const IngredientsSearch: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [ingredients, setIngredients] = useState<IngredientFull[]>([]);
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [selectionModel, setSelectionModel] = useState<GridRowSelectionModel>([]);
 
   useEffect(() => {
     const uri = `http://localhost:8800/ingredients/full`;
@@ -43,10 +54,8 @@ const IngredientsSearch: React.FC = () => {
     if (event.target?.value) setSearchTerm(event.target.value)
     try {
       const uri = `http://localhost:8800/ingredients/full?name=${encodeURIComponent(searchTerm)}`;
-      console.warn(uri);
       const response = await axios.get<IngredientFull[]>(uri);
       setIngredients(response.data);
-      console.warn(response.data);
       setError(null);
     } catch (err) {
       console.error(err);
@@ -55,8 +64,29 @@ const IngredientsSearch: React.FC = () => {
     }
   };
 
+  const handleSelectionChange = (rowSelectionModel: GridRowSelectionModel) => {
+    setSelectionModel(rowSelectionModel);
+  }
+
+  const findRecipes = () => {
+    if (selectionModel.length == 0) return;
+    const ingredients = selectionModel.join(',');
+    const uri = `http://localhost:8800/recipes?ingredients=${ingredients}`;
+    axios.get<Recipe[]>(uri)
+      .then((response) => {
+        setRecipes(response.data);
+        console.warn(response.data);
+        setError(null);
+      })
+      .catch((err) => {
+        console.error(err);
+        setRecipes([]);
+        setError('Ingredients not found');
+      });
+  };
+
   return (
-    <div style={{maxWidth: "1100px", margin: '50px auto'}}>
+    <div style={{maxWidth: `${tableWidth}px`, margin: '50px auto'}}>
       <TextField id="standard-basic"
         placeholder='Search'
         hiddenLabel
@@ -67,7 +97,7 @@ const IngredientsSearch: React.FC = () => {
       {ingredients && (
         <DataGrid
           rows={ingredients}
-          columns={columns}
+          columns={ingredientColumns}
           initialState={{
             pagination: {
               paginationModel: { page: 0, pageSize: 10 },
@@ -75,10 +105,35 @@ const IngredientsSearch: React.FC = () => {
           }}
           getRowId={(row) => row.ingredient_name}
           checkboxSelection
+          onRowSelectionModelChange={handleSelectionChange}
+          rowSelectionModel={selectionModel}
         />
       )}
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
+
+      {selectionModel.length > 0 && 
+        <Button 
+          variant='contained'
+          sx={{marginTop: '40px'}}
+          onClick={findRecipes}>
+            FIND RECIPE
+        </Button>
+      }
+
+      {recipes.length > 0 && (
+        <DataGrid
+          sx={{marginTop: '50px'}}
+          rows={recipes}
+          columns={recipeColumns}
+          initialState={{
+            pagination: {
+              paginationModel: { page: 0, pageSize: 10 },
+            },
+          }}
+          getRowId={(row) => row.recipe_name}
+        />
+      )}
     </div>
   );
 };
