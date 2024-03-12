@@ -2,7 +2,7 @@
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import axios from 'axios';
 import { Ingredient, IngredientFull } from '../models/ingredient';
-import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid';
 import './search.css'
 import { Recipe } from '../models/recipe';
@@ -122,7 +122,7 @@ const IngredientsSearch: React.FC = () => {
         />
       )}
 
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p style={{ color: 'var(--error)' }}>{error}</p>}
 
       {selectionModel.length > 0 && 
         <Button 

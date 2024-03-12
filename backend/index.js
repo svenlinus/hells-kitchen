@@ -16,6 +16,7 @@ db.connect(function(err) {
 
 const app = express();
 app.use(cors());
+app.use(express.json());
 
 app.listen(8800, () => {
   console.log("backend running on 8800");
@@ -113,6 +114,44 @@ app.get("/ingredients/full", (request, response) => {
         WHERE lower(INGREDIENT.ingredient_name) LIKE ?;`
     : defaultQuery + ';';
   db.query(q, [`%${nameLike}%`], (err, data) => {
+    if (err) return response.json(err);
+    return response.json(data);
+  });
+});
+
+app.post("/ingredient", (request, response) => {
+  const ingredient = request.body;
+  const q = `
+    INSERT INTO INGREDIENT (ingredient_name, ingredient_type, ingredient_cost)
+    VALUES (?, ?, ?);
+  `;
+  db.query(q, [ingredient.name, ingredient.type, ingredient.cost], (err, data) => {
+    if (err) return response.json(err);
+    return response.json(data);
+  });
+});
+
+app.post("/flavor", (request, response) => {
+  const ingredient = request.body;
+  const q = `
+    INSERT INTO FLAVORPROFILE (ingredient_name, is_bitter, is_sweet, is_salty, is_sour, is_umami)
+    VALUES (?, ?);
+  `;
+    
+  db.query(q, [ingredient.name, ingredient.flavorProfile], (err, data) => {
+    if (err) return response.json(err);
+    return response.json(data);
+  });
+});
+
+app.post("/nutrition", (request, response) => {
+  const ingredient = request.body;
+  const q = `
+    INSERT INTO NUTRITION (ingredient_name, sugar_amt, fat_amt, protein_amt, carb_amt)
+    VALUE (?, ?, ?, ?, ?);
+  `;
+    
+  db.query(q, [ingredient.name, ingredient.sugar, ingredient.fat, ingredient.protein, ingredient.carb], (err, data) => {
     if (err) return response.json(err);
     return response.json(data);
   });

@@ -31,3 +31,10 @@ WHERE recipe_id = 2
 ORDER BY step_number;
 
 SELECT DISTINCT(ingredient_type) FROM INGREDIENT;
+
+INSERT INTO INGREDIENT (ingredient_name, ingredient_type, ingredient_cost)
+VALUES ('Squid', 'Seafood', 5.15);
+INSERT INTO FLAVORPROFILE (ingredient_name, is_bitter, is_sweet, is_salty, is_sour, is_umami)
+VALUES ('Squid', FALSE, FALSE, TRUE, FALSE, TRUE);
+INSERT INTO NUTRITION (ingredient_name, sugar_amt, fat_amt, protein_amt, carb_amt)
+VALUE ('Squid', 0, 10, 9, 2);

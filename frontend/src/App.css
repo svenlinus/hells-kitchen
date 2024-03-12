@@ -1,5 +1,6 @@
 .main {
   --primary: #3a6ab6;
+  --error: rgb(255, 106, 106);
 }
 
 header {
