@@ -51,12 +51,45 @@ app.get('/recipes', (req, res) => {
 });
 
 app.get("/ingredients", (request, response) => {
-  const nameLike = request.query.name.toLowerCase();
-  const q = nameLike 
-    ?  `SELECT * FROM INGREDIENT
-        WHERE lower(ingredient_name) LIKE ?`
-    : `SELECT * FROM INGREDIENT;`;
-  db.query(q, [`%${nameLike}%`], (err, data) => {
+  const nameLike = request.query.name?.toLowerCase();
+  const recipeId = request.query.recipe;
+
+  let q = `SELECT * FROM INGREDIENT;`;
+  let arg = '';
+
+  if (nameLike) {
+    arg = `%${nameLike}%`
+    q = `
+      SELECT * FROM INGREDIENT
+      WHERE lower(ingredient_name) LIKE ?;
+    `;
+  } 
+  else if (recipeId) {
+    arg = recipeId;
+    q = `
+      SELECT INGREDIENT.ingredient_name, INGREDIENT.ingredient_type, ingredient_cost
+      FROM INGREDIENT
+      JOIN INGREDIENTLIST ON INGREDIENT.ingredient_name = INGREDIENTLIST.ingredient_name
+      WHERE INGREDIENTLIST.recipe_id = ?;
+    `;
+  }
+  db.query(q, [arg], (err, data) => {
+    if (err) return response.json(err);
+    return response.json(data);
+  });
+});
+
+app.get("/steps", (request, response) => {
+  const recipeId = request.query.recipe;
+
+  const q = `
+    SELECT step_number, prep_time, cook_time, step_descript
+    FROM RECIPESTEP
+    WHERE recipe_id = ?
+    ORDER BY step_number;
+  `;
+
+  db.query(q, [recipeId], (err, data) => {
     if (err) return response.json(err);
     return response.json(data);
   });

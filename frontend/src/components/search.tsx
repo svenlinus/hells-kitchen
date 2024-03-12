@@ -6,6 +6,7 @@ import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, 
 import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid';
 import './search.css'
 import { Recipe } from '../models/recipe';
+import ViewRecipe from './viewRecipe';
 
 const nutritionWidth = 140;
 const tableWidth = 1100;
@@ -33,14 +34,13 @@ const IngredientsSearch: React.FC = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [selectionModel, setSelectionModel] = useState<GridRowSelectionModel>([]);
+  const [recipe, setRecipe] = useState<Recipe | null>(null);
 
   useEffect(() => {
     const uri = `http://localhost:8800/ingredients/full`;
-    console.warn(uri);
     axios.get<IngredientFull[]>(uri)
       .then((response) => {
         setIngredients(response.data);
-        console.warn(response.data);
         setError(null);
       })
       .catch((err) => {
@@ -85,6 +85,10 @@ const IngredientsSearch: React.FC = () => {
       });
   };
 
+  const viewRecipe = (event) => {
+    setRecipe(event.row);
+  }
+
   return (
     <div style={{maxWidth: `${tableWidth}px`, margin: '50px auto'}}>
       <TextField id="standard-basic"
@@ -115,7 +119,8 @@ const IngredientsSearch: React.FC = () => {
       {selectionModel.length > 0 && 
         <Button 
           variant='contained'
-          sx={{marginTop: '40px'}}
+          sx={{marginTop: '0'}}
+          color='primary'
           onClick={findRecipes}>
             FIND RECIPE
         </Button>
@@ -123,7 +128,7 @@ const IngredientsSearch: React.FC = () => {
 
       {recipes.length > 0 && (
         <DataGrid
-          sx={{marginTop: '50px'}}
+          sx={{margin: '40px 0'}}
           rows={recipes}
           columns={recipeColumns}
           initialState={{
@@ -131,8 +136,13 @@ const IngredientsSearch: React.FC = () => {
               paginationModel: { page: 0, pageSize: 10 },
             },
           }}
-          getRowId={(row) => row.recipe_name}
+          getRowId={(row) => row.recipe_id}
+          onRowClick={viewRecipe}
         />
+      )}
+
+      {recipe && (
+        <ViewRecipe recipe={recipe} />
       )}
     </div>
   );

@@ -9,7 +9,7 @@ const darkTheme = createTheme({
     mode: 'dark',
     primary: {
       // dark: 'rgb(51, 116, 255)',
-      main: '#ee4d4d'
+      main: '#3a6ab6'
     }
   },
 });

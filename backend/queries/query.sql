@@ -20,9 +20,12 @@ JOIN INGREDIENT ON INGREDIENTLIST.ingredient_name = INGREDIENT.ingredient_name
 GROUP BY ST.recipe_id;
 
 
--- SELECT RECIPE.recipe_id, recipe_name, difficulty, origin, ingredient_cost 
--- FROM RECIPE
--- JOIN INGREDIENTLIST ON RECIPE.recipe_id = INGREDIENTLIST.recipe_id
--- JOIN INGREDIENT ON INGREDIENTLIST.ingredient_name = INGREDIENT.ingredient_name
--- WHERE INGREDIENTLIST.ingredient_name IN ('Pasta', 'Lemon', 'Tomato Sauce')
--- GROUP BY RECIPE.recipe_id;
+SELECT INGREDIENT.ingredient_name, INGREDIENT.ingredient_type, ingredient_cost
+FROM INGREDIENT
+JOIN INGREDIENTLIST ON INGREDIENT.ingredient_name = INGREDIENTLIST.ingredient_name
+WHERE INGREDIENTLIST.recipe_id = 1;
+
+SELECT step_number, prep_time, cook_time, step_descript
+FROM RECIPESTEP
+WHERE recipe_id = 2
+ORDER BY step_number;
