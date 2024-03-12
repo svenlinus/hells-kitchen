@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Recipe } from "../models/recipe";
 import React from "react";
 import axios from "axios";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Checkbox, Typography } from "@mui/material";
 import { Ingredient } from "../models/ingredient";
 import { RecipeStep } from "../models/recipeStep";
 import './viewRecipe.css';
@@ -12,6 +12,7 @@ const ViewRecipe = (props: {recipe}) => {
   const { recipe } = props;
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
   const [instructions, setInstructions] = useState<RecipeStep[]>([]);
+  const [currentStep, setCurrentStep] = useState<number>(0);
 
   useEffect(() => {
     let uri = `http://localhost:8800/ingredients?recipe=${recipe.recipe_id}`;
@@ -36,9 +37,13 @@ const ViewRecipe = (props: {recipe}) => {
       });
   }, [recipe])
 
+  const incrementStep = () => {
+    setCurrentStep((currentStep + 1) % instructions.length);
+  }
+
   return (
     <div>
-      <div className="recipe-card">
+      <div className="container-card">
         <CardContent>
           <Typography variant="h6" color="text.secondary" gutterBottom>
             Recipe:
@@ -48,29 +53,32 @@ const ViewRecipe = (props: {recipe}) => {
           </Typography>
         </CardContent>
       </div>
-      <div className="recipe-card">
+      <div className="container-card">
         <CardContent>
           <Typography variant="h6" color="text.secondary" gutterBottom>
             Ingredients:
           </Typography>
           {ingredients.map((ingredient) => (
-            <Typography variant="h6">{`${ingredient.ingredient_name} - $${ingredient.ingredient_cost}`}</Typography>
+            <div className="ingredient">
+              <Checkbox />
+              <Typography variant="h6">{`${ingredient.ingredient_name} - $${ingredient.ingredient_cost}`}</Typography>
+            </div>
           ))}
         </CardContent>
       </div>
-      <div className="recipe-card">
+      <div className="container-card instructions" onClick={incrementStep}>
         <CardContent>
           <Typography variant="h6" color="text.secondary" sx={{mb: '25px'}}>
             Instructions:
           </Typography>
-          <div className="instructions">
-            {instructions.map((step) => (
-              <div>
+          <div className="columns">
+            {instructions.map((step, i) => (
+              <div className={"step" + (currentStep == i ? " active" : "")}>
                 <div className="step-info">
                   <div className="num">{step.step_number}</div>
                   <div className="time">
                     {step.prep_time + step.cook_time} min
-                    <TimerOutlinedIcon/>
+                    <TimerOutlinedIcon />
                   </div>
                 </div>
                 <Typography variant="h6" sx={{mb: '25px'}}>{step.step_descript}</Typography>

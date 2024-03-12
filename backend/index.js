@@ -57,7 +57,7 @@ app.get("/ingredients", (request, response) => {
   let q = `SELECT * FROM INGREDIENT;`;
   let arg = '';
 
-  if (nameLike) {
+  if (nameLike?.length > 0) {
     arg = `%${nameLike}%`
     q = `
       SELECT * FROM INGREDIENT

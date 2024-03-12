@@ -1,9 +1,13 @@
-.recipe-card {
-  border: 1px solid rgba(81, 81, 81, 1);
-  border-radius: 4px;
+.ingredient {
+  display: flex;
+  align-items: center;
 }
 
 .instructions {
+  cursor: pointer;
+}
+
+.columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
@@ -17,13 +21,29 @@
 }
 
 .step-info > .num {
-  background-color: var(--primary);
+  background-color: rgb(50, 50, 50);
   width: 30px;
   aspect-ratio: 1 / 1;
   border-radius: 100px;
   text-align: center;
   padding-top: 1px;
   font-weight: bold;
+  transition: background-color 250ms;
+}
+
+.active .num {
+  background-color: var(--primary);
+}
+
+.active {
+  outline: 1px solid rgba(81, 81, 81, 1) !important;
+}
+
+.step {
+  outline: 1px solid transparent;
+  border-radius: 5px;
+  padding: 10px;
+  transition: 250ms;
 }
 
 .step-info > .time {

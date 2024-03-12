@@ -29,3 +29,5 @@ SELECT step_number, prep_time, cook_time, step_descript
 FROM RECIPESTEP
 WHERE recipe_id = 2
 ORDER BY step_number;
+
+SELECT DISTINCT(ingredient_type) FROM INGREDIENT;

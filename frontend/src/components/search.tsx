@@ -37,6 +37,10 @@ const IngredientsSearch: React.FC = () => {
   const [recipe, setRecipe] = useState<Recipe | null>(null);
 
   useEffect(() => {
+    resetIngredients();
+  }, []);
+
+  const resetIngredients = () => {
     const uri = `http://localhost:8800/ingredients/full`;
     axios.get<IngredientFull[]>(uri)
       .then((response) => {
@@ -48,10 +52,14 @@ const IngredientsSearch: React.FC = () => {
         setIngredients([]);
         setError('Ingredients not found');
       });
-  }, []);
+  };
 
   const handleSearch = async (event: any) => {
     if (event.target?.value) setSearchTerm(event.target.value)
+    if (event.target?.value.length == 0) {
+      resetIngredients();
+      return;
+    }
     try {
       const uri = `http://localhost:8800/ingredients/full?name=${encodeURIComponent(searchTerm)}`;
       const response = await axios.get<IngredientFull[]>(uri);
@@ -90,7 +98,7 @@ const IngredientsSearch: React.FC = () => {
   }
 
   return (
-    <div style={{maxWidth: `${tableWidth}px`, margin: '50px auto'}}>
+    <div style={{maxWidth: `${tableWidth}px`, margin: '30px auto 50px'}}>
       <TextField id="standard-basic"
         placeholder='Search'
         hiddenLabel
@@ -119,7 +127,6 @@ const IngredientsSearch: React.FC = () => {
       {selectionModel.length > 0 && 
         <Button 
           variant='contained'
-          sx={{marginTop: '0'}}
           color='primary'
           onClick={findRecipes}>
             FIND RECIPE
