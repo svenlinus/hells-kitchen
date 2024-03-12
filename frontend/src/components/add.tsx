@@ -32,6 +32,7 @@ const AddIngredients = () => {
   // const [restrictions, setRestrictions] = useState<String[]>([]);
   const [flavors, setFlavors] = useState<String[]>([]);
   const [error, setError] = useState<String>('');
+  const [success, setSuccess] = useState<String>('');
 
   const addIngredient = () => {
     const flavorProfile = [
@@ -56,7 +57,14 @@ const AddIngredients = () => {
       .then(() => axios.post(`http://localhost:8800/flavor`, data))
       .then(() => axios.post('http://localhost:8800/nutrition', data))
       .then((value) => {
-        if (value.data?.code && value.data?.sqlMessage) setError(value.data.sqlMessage);
+        if (value.data?.code && value.data?.sqlMessage) {
+          setError(value.data.sqlMessage);
+          setSuccess('');
+        }
+        else {
+          setSuccess(`Successfully inserted ${data.name}`);
+          setError('');
+        }
       })
       .catch((err) => console.error(err));
   };  
@@ -131,6 +139,7 @@ const AddIngredients = () => {
         Add Ingredient
       </Button>
       {error && <p style={{ color: 'var(--error)' }}>{error}</p>}
+      {success && <p style={{ color: 'white' }}>{success}</p>}
     </div>
   </div>
 };
